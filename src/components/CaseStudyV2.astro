@@ -1,5 +1,7 @@
 ---
-// Template for pipeline-generated case studies. Reuses the site's project-* classes; new pieces live in /case-v2.css.
+// Template for pipeline-generated case studies, in the "expediente" order:
+// problem -> evidence -> current process -> why automate (and what not) -> solution -> metrics -> what exists -> sources.
+// Reuses the site's project-* classes; new pieces live in /case-v2.css.
 import T from './T.astro';
 
 type L = { es: string; en: string };
@@ -11,20 +13,50 @@ const ui: Record<string, L> = {
   back: { es: 'Volver a proyectos', en: 'Back to projects' },
   demo: { es: 'Probar la demo', en: 'Try the live demo' },
   repo: { es: 'Ver código', en: 'View code' },
+  score: { es: 'Puntaje de la idea', en: 'Idea score' },
   problem: { es: 'El problema', en: 'The problem' },
-  evidence: { es: 'Evidencia', en: 'Evidence' },
-  process: { es: 'Proceso actual vs automatizado', en: 'Current vs automated process' },
+  who: { es: 'Quién lo sufre', en: 'Who suffers it' },
+  process: { es: 'Qué proceso manual lo causa', en: 'The manual process behind it' },
+  fails: { es: 'Qué falla', en: 'What goes wrong' },
+  consequence: { es: 'Qué cuesta', en: 'What it costs' },
+  evidence: { es: 'Evidencia del problema', en: 'Evidence of the problem' },
+  today: { es: 'Cómo se hace hoy', en: 'How it is done today' },
   before: { es: 'Hoy (manual)', en: 'Today (manual)' },
   after: { es: 'Con la automatización', en: 'Automated' },
   assumption: { es: 'SUPUESTO', en: 'ASSUMPTION' },
-  built: { es: 'Qué construimos', en: 'What we built' },
+  measured: { es: 'MEDIDO', en: 'MEASURED' },
+  why: { es: 'Por qué automatizarlo', en: 'Why automate it' },
   notAutomated: { es: 'Qué NO automatizamos', en: 'What we do NOT automate' },
   notAutomatedSub: {
     es: 'La IA prepara, una persona decide. Estos puntos quedan siempre en manos humanas.',
     en: 'AI prepares, a person decides. These steps always stay with a human.',
   },
+  approval: { es: 'Dónde aprueba una persona', en: 'Where a person approves' },
+  solution: { es: 'La solución', en: 'The solution' },
+  inputs: { es: 'Entradas', en: 'Inputs' },
+  rules: { es: 'Reglas', en: 'Rules' },
+  outputs: { es: 'Salidas', en: 'Outputs' },
+  components: { es: 'Componentes', en: 'Components' },
+  safeguards: { es: 'Controles de seguridad', en: 'Security controls' },
+  testData: { es: 'De dónde salen los datos de prueba', en: 'Where the test data comes from' },
+  decisions: { es: 'Por qué se hizo así', en: 'Why it was built this way' },
+  metrics: { es: 'Cómo medimos el éxito', en: 'How we measure success' },
+  mHow: { es: 'Cómo se mide', en: 'How it is measured' },
+  mBase: { es: 'Contra qué se compara', en: 'Compared against' },
+  mTarget: { es: 'Meta', en: 'Target' },
+  mResult: { es: 'Resultado hoy', en: 'Result today' },
+  existing: { es: 'Lo que ya existe', en: 'What already exists' },
+  differentiator: { es: 'En qué se diferencia esta herramienta', en: 'How this tool differs' },
   risks: { es: 'Riesgos y límites', en: 'Risks and limits' },
   next: { es: 'Siguientes funciones', en: 'What comes next' },
+  sources: { es: 'Fuentes principales', en: 'Main sources' },
+  noDate: { es: 'sin fecha', en: 'undated' },
+  zoom: { es: 'Ampliar imagen', en: 'Enlarge image' },
+  close: { es: 'Cerrar', en: 'Close' },
+  prev: { es: 'Anterior', en: 'Previous' },
+  nextImg: { es: 'Siguiente', en: 'Next' },
+  original: { es: 'Abrir original', en: 'Open original' },
+  toggle: { es: 'Tamaño real', en: 'Actual size' },
   details: { es: 'Detalles del proyecto', en: 'Project details' },
   client: { es: 'Para quién', en: 'Built for' },
   duration: { es: 'Duración', en: 'Duration' },
@@ -36,8 +68,18 @@ const ui: Record<string, L> = {
     en: 'Demo with synthetic data. Not customs or legal advice.',
   },
 };
-const minutes = (steps: { minutes: number | null }[]) => steps.reduce((sum, s) => sum + (s.minutes ?? 0), 0);
-const dateFmt = (d: string) => d;
+const sourceType: Record<string, L> = {
+  oficial: { es: 'oficial', en: 'official' },
+  despacho: { es: 'despacho', en: 'law firm' },
+  prensa: { es: 'prensa', en: 'press' },
+  publicacion: { es: 'publicación', en: 'publication' },
+  gremio: { es: 'gremio', en: 'trade body' },
+  proveedor: { es: 'proveedor', en: 'vendor' },
+};
+const minutes = (steps: { minutes: number }[]) => steps.reduce((sum, s) => sum + s.minutes, 0);
+const fmtMin = (m: number) => (m === 0 ? '<1' : String(m));
+const src = (n: number) => data.sources[n - 1];
+const statement = data.problem.statement;
 ---
     <header class="project-hero">
         <div class="project-hero-bg"></div>
@@ -49,6 +91,12 @@ const dateFmt = (d: string) => d;
             <div class="project-tags">{data.tags.map((tag: string) => <span class="project-tag">{tag}</span>)}</div>
             <h1 class="project-title"><T t={data.title} /></h1>
             <p class="project-subtitle"><T t={data.subtitle} /></p>
+            {data.score && (
+                <p class="case-score">
+                    <span class="case-score-label"><T t={ui.score} /></span>
+                    <span class="case-score-value">{data.score.value}<small>/{data.score.max}</small></span>
+                </p>
+            )}
             <div class="case-actions">
                 <a class="btn btn-primary" href={data.demoUrl} target="_blank" rel="noopener"><T t={ui.demo} /> ↗</a>
                 {data.repoUrl && <a class="btn btn-ghost" href={data.repoUrl} target="_blank" rel="noopener"><T t={ui.repo} /></a>}
@@ -57,7 +105,8 @@ const dateFmt = (d: string) => d;
     </header>
 
     <main class="project-body">
-        <div class="project-body-inner" data-animate="fade-up" data-duration="900">
+        <!-- No data-animate here: the reveal fires at 10% visible, which a body this tall never reaches. -->
+        <div class="project-body-inner">
             <div class="project-main">
                 {data.video && (
                     <figure class="project-image case-video">
@@ -66,60 +115,123 @@ const dateFmt = (d: string) => d;
                 )}
 
                 <h2><T t={ui.problem} /></h2>
-                {data.problem.statement.map((p: L) => <p><T t={p} /></p>)}
+                <dl class="case-problem">
+                    <dt><T t={ui.who} /></dt><dd><T t={statement.who} /></dd>
+                    <dt><T t={ui.process} /></dt><dd><T t={statement.process} /></dd>
+                    <dt><T t={ui.fails} /></dt><dd><T t={statement.fails} /></dd>
+                    <dt><T t={ui.consequence} /></dt><dd><T t={statement.consequence} /></dd>
+                </dl>
 
                 <h3 class="case-subhead"><T t={ui.evidence} /></h3>
                 <ol class="case-evidence">
-                    {data.problem.evidence.map((e: any) => (
+                    {data.evidence.map((e: any) => (
                         <li>
                             <p><T t={e.claim} /></p>
-                            <a href={e.url} target="_blank" rel="noopener">{e.source}</a>
-                            <span class="case-evidence-meta">{e.type} · {dateFmt(e.date)}</span>
+                            <a href={src(e.source).url} target="_blank" rel="noopener">{src(e.source).title}</a>
+                            <span class="case-evidence-meta">
+                                <T t={sourceType[src(e.source).type]} /> · {src(e.source).date ?? ''}
+                                · <a class="case-ref" href={`#fuente-${e.source}`}>[{e.source}]</a>
+                            </span>
                         </li>
                     ))}
                 </ol>
 
-                <h2><T t={ui.process} /></h2>
+                <h2><T t={ui.today} /></h2>
                 <div class="case-process">
                     {[['before', data.process.before], ['after', data.process.after]].map(([kind, steps]: any) => (
                         <div class={`case-process-col case-process-${kind}`}>
                             <div class="case-process-head">
                                 <T t={ui[kind]} />
-                                <span class="case-process-total">{minutes(steps)} min</span>
+                                <span class="case-process-total">{fmtMin(minutes(steps))} min</span>
                             </div>
                             <ol>
                                 {steps.map((s: any) => (
                                     <li>
                                         <T t={s.text} />
-                                        {s.minutes !== null && <span class="case-step-min">{s.minutes} min</span>}
-                                        {s.assumption && <span class="case-flag"><T t={ui.assumption} /></span>}
+                                        <span class="case-step-min">{fmtMin(s.minutes)} min</span>
+                                        {s.basis === 'assumption' && <span class="case-flag"><T t={ui.assumption} /></span>}
+                                        {s.basis === 'measured' && <span class="case-flag case-flag-measured"><T t={ui.measured} /></span>}
+                                        {s.basis === 'source' && <a class="case-flag" href={`#fuente-${s.ref}`}>[{s.ref}]</a>}
                                     </li>
                                 ))}
                             </ol>
                         </div>
                     ))}
                 </div>
+                {data.process.note && (
+                    <p class="case-note">
+                        <T t={data.process.note} />
+                        {data.process.noteRef && <a class="case-ref" href={`#fuente-${data.process.noteRef}`}> [{data.process.noteRef}]</a>}
+                    </p>
+                )}
 
-                <h2><T t={ui.built} /></h2>
-                <p><T t={data.built.summary} /></p>
-                <ul>{data.built.bullets.map((b: L) => <li><T t={b} /></li>)}</ul>
+                <h2><T t={ui.why} /></h2>
+                <ul>{data.why.reasons.map((r: L) => <li><T t={r} /></li>)}</ul>
+
+                <section class="case-human">
+                    <h2><T t={ui.notAutomated} /></h2>
+                    <p class="case-human-sub"><T t={ui.notAutomatedSub} /></p>
+                    <ul>{data.notAutomated.map((n: L) => <li><T t={n} /></li>)}</ul>
+                    <h3 class="case-human-head"><T t={ui.approval} /></h3>
+                    <p><T t={data.why.approval} /></p>
+                </section>
+
+                <h2><T t={ui.solution} /></h2>
+                <p><T t={data.solution.summary} /></p>
+                <div class="case-io">
+                    <div><h3 class="case-subhead"><T t={ui.inputs} /></h3><ul>{data.solution.inputs.map((x: L) => <li><T t={x} /></li>)}</ul></div>
+                    <div><h3 class="case-subhead"><T t={ui.rules} /></h3><ul>{data.solution.rules.map((x: L) => <li><T t={x} /></li>)}</ul></div>
+                    <div><h3 class="case-subhead"><T t={ui.outputs} /></h3><ul>{data.solution.outputs.map((x: L) => <li><T t={x} /></li>)}</ul></div>
+                </div>
 
                 {data.gallery.length > 0 && (
-                    <div class="project-gallery">
-                        {data.gallery.map((m: any) => (
+                    <div class="project-gallery case-gallery">
+                        {data.gallery.map((m: any, i: number) => (
                             <figure class="project-image">
-                                <img src={m.src} alt={m.alt.en} loading="lazy" />
+                                <button type="button" class="case-zoom" data-index={i} data-src={m.src}>
+                                    <img src={m.src} alt={m.alt.en} loading="lazy" />
+                                    <span class="case-zoom-hint" aria-hidden="true">⤢</span>
+                                    <span class="sr-only"><T t={ui.zoom} /></span>
+                                </button>
                                 {m.caption && <figcaption><T t={m.caption} /></figcaption>}
                             </figure>
                         ))}
                     </div>
                 )}
 
-                <section class="case-human">
-                    <h2><T t={ui.notAutomated} /></h2>
-                    <p class="case-human-sub"><T t={ui.notAutomatedSub} /></p>
-                    <ul>{data.notAutomated.map((n: L) => <li><T t={n} /></li>)}</ul>
-                </section>
+                <h3 class="case-subhead"><T t={ui.components} /></h3>
+                <div class="case-stack">{data.solution.components.map((c: string) => <span class="project-tag">{c}</span>)}</div>
+                <h3 class="case-subhead"><T t={ui.safeguards} /></h3>
+                <ul>{data.solution.safeguards.map((x: L) => <li><T t={x} /></li>)}</ul>
+                <h3 class="case-subhead"><T t={ui.testData} /></h3>
+                <p><T t={data.solution.testData} /></p>
+                <h3 class="case-subhead"><T t={ui.decisions} /></h3>
+                <ul>{data.solution.decisions.map((x: L) => <li><T t={x} /></li>)}</ul>
+
+                <h2><T t={ui.metrics} /></h2>
+                <div class="case-metrics">
+                    {data.metrics.map((m: any) => (
+                        <article class="case-metric">
+                            <h3><T t={m.name} /></h3>
+                            <dl>
+                                <dt><T t={ui.mHow} /></dt><dd><T t={m.how} /></dd>
+                                <dt><T t={ui.mBase} /></dt><dd><T t={m.baseline} /></dd>
+                                <dt><T t={ui.mTarget} /></dt><dd><T t={m.target} /></dd>
+                                <dt><T t={ui.mResult} /></dt><dd class="case-metric-result"><T t={m.result} /></dd>
+                            </dl>
+                        </article>
+                    ))}
+                </div>
+                {data.metricsNote && <p class="case-note"><T t={data.metricsNote} /></p>}
+
+                <h2><T t={ui.existing} /></h2>
+                <ul class="case-existing">
+                    {data.existing.items.map((x: any) => (
+                        <li><a href={x.url} target="_blank" rel="noopener">{x.name}</a> <T t={x.what} /></li>
+                    ))}
+                </ul>
+                <h3 class="case-subhead"><T t={ui.differentiator} /></h3>
+                <p><T t={data.existing.differentiator} /></p>
 
                 {data.risks.length > 0 && (
                     <>
@@ -134,6 +246,18 @@ const dateFmt = (d: string) => d;
                         <ul class="case-next">{data.nextFeatures.map((f: L) => <li><T t={f} /></li>)}</ul>
                     </>
                 )}
+
+                <h2><T t={ui.sources} /></h2>
+                <ol class="case-sources">
+                    {data.sources.map((s: any, i: number) => (
+                        <li id={`fuente-${i + 1}`}>
+                            <a href={s.url} target="_blank" rel="noopener">{s.title}</a>
+                            <span class="case-evidence-meta">
+                                <T t={sourceType[s.type]} /> · {s.date ?? ''}{s.date === null && <T t={ui.noDate} />}
+                            </span>
+                        </li>
+                    ))}
+                </ol>
 
                 <p class="case-disclaimer"><T t={ui.disclaimer} /></p>
             </div>
@@ -167,3 +291,71 @@ const dateFmt = (d: string) => d;
             </aside>
         </div>
     </main>
+
+    {data.gallery.length > 0 && (
+        <dialog id="case-lightbox" class="case-lightbox" aria-label="Image viewer">
+            <div class="case-lightbox-bar">
+                <p class="case-lightbox-caption" id="case-lightbox-caption"></p>
+                <div class="case-lightbox-actions">
+                    <button type="button" data-act="prev"><T t={ui.prev} /></button>
+                    <button type="button" data-act="next"><T t={ui.nextImg} /></button>
+                    <button type="button" data-act="size" aria-pressed="false"><T t={ui.toggle} /></button>
+                    <a data-act="open" href="#" target="_blank" rel="noopener"><T t={ui.original} /></a>
+                    <button type="button" data-act="close" class="case-lightbox-close"><T t={ui.close} /></button>
+                </div>
+            </div>
+            <div class="case-lightbox-stage"><img id="case-lightbox-img" alt="" /></div>
+        </dialog>
+    )}
+
+<script>
+    // Click an image to see it large: fit-to-screen by default, "actual size" scrolls. Escape, arrows and a backdrop click work.
+    const dlg = document.getElementById('case-lightbox') as HTMLDialogElement | null;
+    if (dlg) {
+        const img = dlg.querySelector('#case-lightbox-img') as HTMLImageElement;
+        const cap = dlg.querySelector('#case-lightbox-caption') as HTMLElement;
+        const open = dlg.querySelector('[data-act="open"]') as HTMLAnchorElement;
+        const size = dlg.querySelector('[data-act="size"]') as HTMLButtonElement;
+        const items = Array.from(document.querySelectorAll<HTMLButtonElement>('.case-zoom'));
+        let idx = 0;
+        const setFull = (full: boolean) => {
+            dlg.toggleAttribute('data-full', full);
+            size.setAttribute('aria-pressed', String(full));
+            // Screenshots are captured at 2x, so half the pixel width is their real size. Fit mode caps that at the
+            // screen width and scrolls vertically (a tall page is unreadable when squeezed to fit the height).
+            img.style.width = img.naturalWidth ? `${Math.round(img.naturalWidth / 2)}px` : '';
+        };
+        const show = (i: number) => {
+            idx = (i + items.length) % items.length;
+            const b = items[idx];
+            const pic = b.querySelector('img') as HTMLImageElement;
+            img.onload = () => setFull(dlg.hasAttribute('data-full'));
+            img.src = b.dataset.src ?? pic.src;
+            img.alt = pic.alt;
+            open.href = img.src;
+            cap.innerHTML = b.closest('figure')?.querySelector('figcaption')?.innerHTML ?? '';
+            dlg.querySelector('.case-lightbox-stage')?.scrollTo(0, 0);
+        };
+        items.forEach((b, i) =>
+            b.addEventListener('click', () => {
+                setFull(false);
+                show(i);
+                dlg.showModal();
+            }),
+        );
+        dlg.addEventListener('click', (ev) => {
+            const t = ev.target as HTMLElement;
+            if (t === dlg || t.classList.contains('case-lightbox-stage')) dlg.close();
+            const act = t.closest('[data-act]')?.getAttribute('data-act');
+            if (act === 'close') dlg.close();
+            if (act === 'prev') show(idx - 1);
+            if (act === 'next') show(idx + 1);
+            if (act === 'size') setFull(!dlg.hasAttribute('data-full'));
+        });
+        img.addEventListener('click', () => setFull(!dlg.hasAttribute('data-full')));
+        dlg.addEventListener('keydown', (ev) => {
+            if (ev.key === 'ArrowLeft') show(idx - 1);
+            if (ev.key === 'ArrowRight') show(idx + 1);
+        });
+    }
+</script>

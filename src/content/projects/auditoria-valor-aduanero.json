@@ -23,47 +23,58 @@
   "video": null,
   "gallery": [
     {
-      "src": "/projects/auditoria-valor-aduanero/01-expedientes.png",
+      "src": "/projects/auditoria-valor-aduanero/01-pruebalo.png",
       "alt": {
-        "en": "List of cases with their status: ready to approve or with errors to fix",
-        "es": "Lista de expedientes con su estado: listo para aprobar o con errores por corregir"
+        "es": "Panel para probar la demo: seis paquetes de ejemplo descargables y la zona para subirlos",
+        "en": "Panel to try the demo: six downloadable sample packs and the area to upload them"
       },
       "caption": {
-        "en": "Every case arrives with its status: ready to approve or with errors to fix.",
-        "es": "Cada expediente llega con su estado: listo para aprobar o con errores por corregir."
+        "es": "Cualquiera puede descargar un paquete de ejemplo, subirlo y ver el resultado, sin cuenta ni documentos propios.",
+        "en": "Anyone can download a sample pack, upload it and see the result, with no account or documents of their own."
       }
     },
     {
-      "src": "/projects/auditoria-valor-aduanero/02-listo.png",
+      "src": "/projects/auditoria-valor-aduanero/02-expedientes.png",
       "alt": {
-        "en": "Clean case: invoice and COVE cross-checked, add-ons with their basis, ready to approve",
-        "es": "Expediente limpio: factura y COVE cotejados, incrementables con fundamento y listo para aprobar"
+        "es": "Lista de expedientes con su estado: listo para aprobar o con errores por corregir",
+        "en": "List of cases with their status: ready to approve or with errors to fix"
       },
       "caption": {
-        "en": "A clean case: everything adds up and it is ready for a person to approve.",
-        "es": "Un expediente limpio: todo cuadra y queda listo para que una persona lo apruebe."
+        "es": "Cada expediente llega con su estado: listo para aprobar o con errores por corregir.",
+        "en": "Every case arrives with its status: ready to approve or with errors to fix."
       }
     },
     {
-      "src": "/projects/auditoria-valor-aduanero/03-descuadre.png",
+      "src": "/projects/auditoria-valor-aduanero/03-listo.png",
       "alt": {
-        "en": "Red case with the mismatch between the sum of line items and the COVE value flagged in the findings",
-        "es": "Expediente en rojo con el descuadre entre la suma de partidas y el valor del COVE marcado en los hallazgos"
+        "es": "Expediente limpio: factura y COVE cotejados, incrementables con fundamento y listo para aprobar",
+        "en": "Clean case: invoice and COVE cross-checked, add-ons with their basis, ready to approve"
       },
       "caption": {
-        "en": "An invoice/COVE mismatch is flagged red and cannot be approved.",
-        "es": "Un descuadre entre factura y COVE se marca en rojo y no se puede aprobar."
+        "es": "Un expediente limpio: todo cuadra y queda listo para que una persona lo apruebe.",
+        "en": "A clean case: everything adds up and it is ready for a person to approve."
       }
     },
     {
-      "src": "/projects/auditoria-valor-aduanero/04-movil.png",
+      "src": "/projects/auditoria-valor-aduanero/04-descuadre.png",
       "alt": {
-        "en": "The same case on a phone",
-        "es": "El mismo expediente en un teléfono"
+        "es": "Expediente en rojo con el descuadre entre la suma de partidas y el valor del COVE marcado en los hallazgos",
+        "en": "Red case with the mismatch between the sum of line items and the COVE value flagged in the findings"
       },
       "caption": {
-        "en": "It works the same on a phone.",
-        "es": "Se usa igual en el teléfono."
+        "es": "Un descuadre entre factura y COVE se marca en rojo y no se puede aprobar.",
+        "en": "An invoice/COVE mismatch is flagged red and cannot be approved."
+      }
+    },
+    {
+      "src": "/projects/auditoria-valor-aduanero/05-movil.png",
+      "alt": {
+        "es": "El mismo expediente en un teléfono",
+        "en": "The same case on a phone"
+      },
+      "caption": {
+        "es": "Se usa igual en el teléfono.",
+        "en": "It works the same on a phone."
       }
     }
   ],
@@ -80,30 +91,75 @@
     "tech": "FastAPI · PostgreSQL · HTMX · Docker"
   },
   "problem": {
-    "statement": [
-      {
-        "es": "El valor en aduana no es solo el precio de la factura: según el Incoterm pactado, hay que sumar fletes, seguros y gastos conexos, y no sumarlos dos veces cuando el precio ya los incluye.",
-        "en": "Customs value is not just the invoice price: depending on the agreed Incoterm, freight, insurance and related costs must be added, and not added twice when the price already includes them."
+    "statement": {
+      "who": {
+        "es": "Importadores y agencias aduanales en México: los equipos de comercio exterior que preparan la manifestación de valor electrónica (formato E2) en VUCEM.",
+        "en": "Importers and customs brokerages in Mexico: the foreign-trade teams that prepare the electronic value declaration (E2 format) in VUCEM."
       },
-      {
-        "es": "Hoy esa revisión es manual: alguien abre la factura, el COVE y los comprobantes, y compara cifras a ojo antes de capturar la manifestación de valor. Un descuadre de centavos, un Tax ID faltante o una moneda distinta entre documentos se descubre tarde.",
-        "en": "Today that check is manual: someone opens the invoice, the COVE and the supporting documents and compares figures by eye before filing the value declaration. A cents-level mismatch, a missing Tax ID or a different currency between documents is found late."
+      "process": {
+        "es": "Antes de firmar, alguien abre la factura, el COVE y los comprobantes de flete y seguro, compara cifras a ojo, calcula a mano los incrementables según el Incoterm y captura el formato.",
+        "en": "Before signing, someone opens the invoice, the COVE and the freight and insurance documents, compares figures by eye, works out the add-ons for the Incoterm by hand and keys in the form."
+      },
+      "fails": {
+        "es": "Un descuadre de centavos, un flete sumado dos veces cuando el precio ya lo incluye, un Tax ID faltante o una moneda distinta entre documentos se descubren tarde, cuando el formato ya está capturado o transmitido.",
+        "en": "A cents-level mismatch, freight added twice when the price already includes it, a missing Tax ID or a different currency between documents is found late, after the form is already keyed in or filed."
+      },
+      "consequence": {
+        "es": "Retrabajo (con datos inexactos hay que generar un formato nuevo), demoras en el despacho y, si se transmiten datos inexactos de valor, una multa de $53,500 a $106,970 por infracción.",
+        "en": "Rework (with inaccurate data a new form must be generated), clearance delays and, if inaccurate value data is filed, a fine of MXN 53,500 to 106,970 per infraction."
       }
-    ],
-    "evidence": [
-      {
-        "claim": {
-          "es": "La Ley Aduanera dispone que el valor de transacción comprende, además del precio pagado, los gastos de transporte, seguros y gastos conexos hasta el punto previsto en el artículo 56, fracción I, cuando corran a cargo del importador y no estén incluidos en el precio.",
-          "en": "The Customs Law states that the transaction value includes, besides the price paid, transport, insurance and related costs up to the point set by article 56, section I, when borne by the importer and not already included in the price."
-        },
-        "source": "Ley Aduanera, art. 65, fracción I, inciso d) (texto vigente, última reforma DOF 19-11-2025)",
-        "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LAdua.pdf",
-        "date": "2025-11-19",
-        "type": "oficial"
-      }
-    ]
+    }
   },
+  "evidence": [
+    {
+      "claim": {
+        "es": "El valor de transacción incluye, además del precio pagado, los gastos de transporte, seguros y gastos conexos hasta el punto previsto en el artículo 56, fracción I, cuando corran a cargo del importador y no estén incluidos en el precio. Por eso el Incoterm decide qué se suma y qué no.",
+        "en": "The transaction value includes, besides the price paid, transport, insurance and related costs up to the point set by article 56, section I, when borne by the importer and not already included in the price. That is why the Incoterm decides what is added and what is not."
+      },
+      "source": 1
+    },
+    {
+      "claim": {
+        "es": "Transmitir datos inexactos o falsos sobre el valor de las mercancías o su comercialización es una infracción (art. 184-A, fracc. I), con multa de $53,500.00 a $106,970.00 (art. 184-B, fracc. I, cantidades actualizadas el 27-12-2025).",
+        "en": "Filing inaccurate or false data about the value of the goods or their commercialization is an infraction (art. 184-A, sec. I), fined at MXN 53,500.00 to 106,970.00 (art. 184-B, sec. I, amounts updated on 2025-12-27)."
+      },
+      "source": 1
+    },
+    {
+      "claim": {
+        "es": "Si la información o la documentación anexa al formato E2 estaba incompleta o con datos inexactos, debe generarse un nuevo formato en la Ventanilla Digital (regla 1.5.1, fracción V).",
+        "en": "If the information or documents attached to the E2 form were incomplete or inaccurate, a new form must be generated in the Digital Window (rule 1.5.1, section V)."
+      },
+      "source": 2
+    },
+    {
+      "claim": {
+        "es": "A partir del 1 de octubre de 2026 aplica el esquema de transmisión de la manifestación de valor de la regla 1.5.1, con facilidades temporales hasta el 31 de diciembre de 2026.",
+        "en": "From 1 October 2026 the value-declaration filing scheme of rule 1.5.1 applies, with temporary facilities until 31 December 2026."
+      },
+      "source": 3
+    },
+    {
+      "claim": {
+        "es": "En la práctica es frecuente que el acuse de valor (COVE) contenga errores o inconsistencias en los datos declarados, o que se omitan datos obligatorios; si la autoridad lo detecta, la consecuencia es una sanción administrativa.",
+        "en": "In practice it is common for the value acknowledgement (COVE) to contain errors or inconsistencies, or to omit mandatory data; if the authority detects it, the consequence is an administrative sanction."
+      },
+      "source": 4
+    },
+    {
+      "claim": {
+        "es": "Entre los errores comunes al llenar la MVE están las discrepancias entre la factura y la MVE (proveedor, cantidades, importes, moneda, Incoterm) y dejar fuera incrementables; un error en el formato puede causar su rechazo en VUCEM y retrasar el pedimento. Es la opinión de un proveedor de software, no una cifra medida.",
+        "en": "Common mistakes when filling the MVE include discrepancies between the invoice and the MVE (supplier, quantities, amounts, currency, Incoterm) and leaving out add-ons; an error in the form can lead to its rejection in VUCEM and delay the customs entry. This is a software vendor's view, not a measured figure."
+      },
+      "source": 5
+    }
+  ],
   "process": {
+    "note": {
+      "es": "Estos tiempos son supuestos de trabajo, no mediciones. Como referencia, un proveedor de software afirma que la captura manual en VUCEM toma 30 a 60 minutos por MVE; es una afirmación comercial sin medición independiente.",
+      "en": "These times are working assumptions, not measurements. For reference, a software vendor claims manual entry in VUCEM takes 30 to 60 minutes per MVE; that is a commercial claim with no independent measurement."
+    },
+    "noteRef": 6,
     "before": [
       {
         "text": {
@@ -111,7 +167,7 @@
           "en": "Open the invoice, COVE and supporting documents and locate each figure"
         },
         "minutes": 15,
-        "assumption": true
+        "basis": "assumption"
       },
       {
         "text": {
@@ -119,7 +175,7 @@
           "en": "Compare totals, currency, Incoterm and Tax ID across documents"
         },
         "minutes": 15,
-        "assumption": true
+        "basis": "assumption"
       },
       {
         "text": {
@@ -127,17 +183,25 @@
           "en": "Work out the add-ons for the Incoterm and key in the draft"
         },
         "minutes": 20,
-        "assumption": true
+        "basis": "assumption"
       }
     ],
     "after": [
       {
         "text": {
-          "es": "Subir los documentos; el sistema los lee, aplica las 6 reglas y arma el borrador",
-          "en": "Upload the documents; the system reads them, applies the 6 rules and builds the draft"
+          "es": "Subir los documentos del expediente",
+          "en": "Upload the case documents"
         },
-        "minutes": 2,
-        "assumption": true
+        "minutes": 1,
+        "basis": "assumption"
+      },
+      {
+        "text": {
+          "es": "El sistema los lee, aplica las seis reglas y arma el borrador (alrededor de 1 segundo por expediente en el corpus sintético)",
+          "en": "The system reads them, applies the six rules and builds the draft (about 1 second per case on the synthetic corpus)"
+        },
+        "minutes": 0,
+        "basis": "measured"
       },
       {
         "text": {
@@ -145,33 +209,29 @@
           "en": "Review findings, fix low-confidence fields and approve"
         },
         "minutes": 10,
-        "assumption": true
+        "basis": "assumption"
       }
     ]
   },
-  "built": {
-    "summary": {
-      "es": "Una aplicación que recibe factura (XML o PDF), COVE (XML) y comprobantes de flete y seguro, y devuelve un semáforo, los hallazgos con su fundamento y un borrador del Formato E2 en JSON y XML, con reporte en PDF.",
-      "en": "An application that takes the invoice (XML or PDF), the COVE (XML) and freight/insurance documents, and returns a traffic light, findings with their basis and a draft E2 form in JSON and XML, plus a PDF report."
-    },
-    "bullets": [
+  "why": {
+    "reasons": [
       {
-        "es": "Seis reglas: incrementables por Incoterm, no duplicación, tolerancia exacta de 0.00, datos obligatorios, consistencia factura-COVE y calidad de extracción.",
-        "en": "Six rules: Incoterm add-ons, no double counting, an exact 0.00 tolerance, mandatory data, invoice-COVE consistency and extraction quality."
+        "es": "El cotejo entre documentos es mecánico y repetitivo: las mismas cifras (importes, moneda, Incoterm, Tax ID) en tres o cuatro archivos. Es el tipo de trabajo donde una persona se equivoca por cansancio y una regla no.",
+        "en": "Cross-checking documents is mechanical and repetitive: the same figures (amounts, currency, Incoterm, Tax ID) across three or four files. It is the kind of work where a person slips from fatigue and a rule does not."
       },
       {
-        "es": "Aritmética decimal estricta y cada campo extraído con su nivel de confianza.",
-        "en": "Strict decimal arithmetic and every extracted field carries its confidence level."
+        "es": "El costo de equivocarse es asimétrico: revisar tarda minutos; un dato inexacto de valor puede costar de $53,500 a $106,970 por infracción y obliga a rehacer el formato.",
+        "en": "The cost of a mistake is lopsided: reviewing takes minutes; inaccurate value data can cost MXN 53,500 to 106,970 per infraction and forces the form to be redone."
       },
       {
-        "es": "Una persona aprueba antes de exportar; aprobar exige notas en los hallazgos amarillos y confirmar los campos dudosos.",
-        "en": "A person approves before export; approving requires notes on yellow findings and confirming doubtful fields."
-      },
-      {
-        "es": "Bitácora de auditoría de solo-agregar y originales inmutables con hash SHA-256.",
-        "en": "Append-only audit log and immutable originals with SHA-256 hashes."
+        "es": "Resuelve el problema de descubrir los errores antes de firmar, con el fundamento legal de cada hallazgo a la vista, en lugar de después.",
+        "en": "It solves the problem of finding errors before signing, with the legal basis of each finding in plain sight, instead of afterwards."
       }
-    ]
+    ],
+    "approval": {
+      "es": "Una persona revisa y aprueba cada expediente antes de exportar el borrador. Aprobar con hallazgos amarillos exige una nota, y los campos de baja confianza deben confirmarse a mano. La firma con e.firma y la transmisión a VUCEM ocurren siempre fuera del sistema.",
+      "en": "A person reviews and approves each case before the draft is exported. Approving with yellow findings requires a note, and low-confidence fields must be confirmed by hand. Signing with the e-signature and filing with VUCEM always happen outside the system."
+    }
   },
   "notAutomated": [
     {
@@ -187,6 +247,262 @@
       "en": "It does not decide whether a doubtful case proceeds: it flags it and leaves it to a person."
     }
   ],
+  "solution": {
+    "summary": {
+      "es": "Una aplicación web que recibe los documentos de una importación, los lee, los coteja entre sí con seis reglas y devuelve un semáforo, los hallazgos con su fundamento y un borrador del Formato E2 para que una persona lo apruebe.",
+      "en": "A web application that takes the documents of an import, reads them, cross-checks them with six rules and returns a traffic light, the findings with their basis and a draft E2 form for a person to approve."
+    },
+    "inputs": [
+      {
+        "es": "Factura comercial (XML estructurado o PDF)",
+        "en": "Commercial invoice (structured XML or PDF)"
+      },
+      {
+        "es": "COVE (XML)",
+        "en": "COVE (XML)"
+      },
+      {
+        "es": "Comprobantes de flete y seguro (PDF o XML)",
+        "en": "Freight and insurance documents (PDF or XML)"
+      }
+    ],
+    "rules": [
+      {
+        "es": "R1 Incrementables por Incoterm (fundamento: art. 65 de la Ley Aduanera)",
+        "en": "R1 Add-ons by Incoterm (basis: art. 65 of the Customs Law)"
+      },
+      {
+        "es": "R2 No duplicar flete o seguro cuando el Incoterm ya los incluye",
+        "en": "R2 Do not double count freight or insurance when the Incoterm already includes them"
+      },
+      {
+        "es": "R3 Suma de partidas igual al valor del COVE, con tolerancia exacta de 0.00",
+        "en": "R3 Sum of line items equals the COVE value, with an exact 0.00 tolerance"
+      },
+      {
+        "es": "R4 Datos obligatorios presentes (Tax ID, vinculación, moneda)",
+        "en": "R4 Mandatory data present (Tax ID, link, currency)"
+      },
+      {
+        "es": "R5 Consistencia entre factura y COVE (número, proveedor, Incoterm, moneda, fecha)",
+        "en": "R5 Invoice and COVE consistency (number, supplier, Incoterm, currency, date)"
+      },
+      {
+        "es": "R6 Calidad de la lectura: todo campo dudoso exige confirmación humana",
+        "en": "R6 Reading quality: every doubtful field requires human confirmation"
+      }
+    ],
+    "outputs": [
+      {
+        "es": "Semáforo verde, amarillo o rojo por expediente",
+        "en": "Green, yellow or red traffic light per case"
+      },
+      {
+        "es": "Hallazgos, cada uno con su regla y su fundamento",
+        "en": "Findings, each with its rule and its basis"
+      },
+      {
+        "es": "Borrador del Formato E2 en JSON (y XML marcado como no verificado) y reporte PDF",
+        "en": "Draft E2 form as JSON (and XML marked unverified) and a PDF report"
+      }
+    ],
+    "components": [
+      "Python 3.12",
+      "FastAPI",
+      "lxml y pdfplumber",
+      "PostgreSQL 16",
+      "HTMX",
+      "Docker Compose"
+    ],
+    "safeguards": [
+      {
+        "es": "Los originales se guardan sin cambios con su hash SHA-256 y la bitácora de auditoría es de solo agregar (la protege un trigger de la base de datos).",
+        "en": "Originals are stored unchanged with their SHA-256 hash and the audit log is append-only (a database trigger protects it)."
+      },
+      {
+        "es": "Nunca solicita ni guarda la e.firma y nunca transmite nada a VUCEM; todo corre en el servidor propio, sin enviar datos a servicios externos.",
+        "en": "It never asks for or stores the e-signature and never files anything with VUCEM; everything runs on your own server, with no data sent to external services."
+      },
+      {
+        "es": "Los importes usan aritmética decimal exacta (nunca flotantes) y cada campo extraído lleva su nivel de confianza y su origen.",
+        "en": "Amounts use exact decimal arithmetic (never floats) and every extracted field carries its confidence level and its origin."
+      },
+      {
+        "es": "Los archivos subidos se validan por tipo y tamaño y el XML se lee con las entidades externas desactivadas.",
+        "en": "Uploaded files are validated by type and size and XML is read with external entities disabled."
+      }
+    ],
+    "testData": {
+      "es": "Se probó con 50 expedientes sintéticos generados por el propio proyecto (20 limpios y 30 con errores inyectados a propósito). No se usaron facturas reales porque contienen datos comerciales y fiscales de terceros, y no se encontró un esquema oficial público del COVE ni del E2 para validar los XML, así que la forma de los archivos es una suposición documentada. La demo pública acepta únicamente los seis paquetes de ejemplo descargables.",
+      "en": "It was tested with 50 synthetic cases generated by the project itself (20 clean and 30 with deliberately injected errors). Real invoices were not used because they contain third-party commercial and tax data, and no public official schema for the COVE or the E2 was found to validate the XML, so the file shapes are a documented assumption. The public demo accepts only the six downloadable sample packs."
+    },
+    "decisions": [
+      {
+        "es": "Reglas como funciones puras y probadas, no como un flujo visual: cada regla recibe un expediente y devuelve hallazgos, así se prueba sin base de datos ni red y su resultado es reproducible.",
+        "en": "Rules as pure, tested functions rather than a visual workflow: each rule takes a case and returns findings, so it is tested without a database or network and its result is reproducible."
+      },
+      {
+        "es": "Tolerancia exacta de 0.00 en las sumas, porque el objetivo es encontrar justo el descuadre de centavos que una persona no ve a simple vista.",
+        "en": "Exact 0.00 tolerance on the sums, because the goal is to find precisely the cents-level mismatch a person does not see at a glance."
+      },
+      {
+        "es": "Aprobación humana obligatoria y sin firma: la herramienta prepara y audita; la decisión y la e.firma son del agente aduanal o del importador.",
+        "en": "Mandatory human approval and no signing: the tool prepares and audits; the decision and the e-signature belong to the customs broker or the importer."
+      },
+      {
+        "es": "Sin inicio de sesión en la demo pública: cualquiera puede descargar un paquete de ejemplo, subirlo y ver el resultado sin cuenta ni documentos propios.",
+        "en": "No sign-in on the public demo: anyone can download a sample pack, upload it and see the result without an account or documents of their own."
+      }
+    ]
+  },
+  "metrics": [
+    {
+      "name": {
+        "es": "Campos del E2 sin discrepancia",
+        "en": "E2 fields without discrepancy"
+      },
+      "how": {
+        "es": "Comparar cada campo del borrador contra el valor esperado de cada expediente del corpus.",
+        "en": "Compare every field of the draft against the expected value of each case in the corpus."
+      },
+      "baseline": {
+        "es": "Un checklist manual: una persona llena el E2 con los mismos documentos y se mide su exactitud (aún por medir).",
+        "en": "A manual checklist: a person fills the E2 from the same documents and their accuracy is measured (still to be measured)."
+      },
+      "target": {
+        "es": "98 % o más",
+        "en": "98% or more"
+      },
+      "result": {
+        "es": "100 % en el corpus sintético",
+        "en": "100% on the synthetic corpus"
+      }
+    },
+    {
+      "name": {
+        "es": "Errores inyectados detectados",
+        "en": "Injected errors detected"
+      },
+      "how": {
+        "es": "Cada error sembrado debe aparecer en los hallazgos con el código esperado.",
+        "en": "Every seeded error must show up in the findings with the expected code."
+      },
+      "baseline": {
+        "es": "La misma revisión hecha a ojo con el checklist manual (aún por medir).",
+        "en": "The same review done by eye with the manual checklist (still to be measured)."
+      },
+      "target": {
+        "es": "100 %",
+        "en": "100%"
+      },
+      "result": {
+        "es": "100 % (30 de 30 expedientes con error)",
+        "en": "100% (30 of 30 cases with an error)"
+      }
+    },
+    {
+      "name": {
+        "es": "Falsos positivos en expedientes limpios",
+        "en": "False positives on clean cases"
+      },
+      "how": {
+        "es": "Los expedientes limpios deben salir en verde sin ningún hallazgo.",
+        "en": "Clean cases must come out green with no findings."
+      },
+      "baseline": {
+        "es": "No aplica: es un tope, no una comparación.",
+        "en": "Not applicable: it is a ceiling, not a comparison."
+      },
+      "target": {
+        "es": "0",
+        "en": "0"
+      },
+      "result": {
+        "es": "0 de 20",
+        "en": "0 of 20"
+      }
+    },
+    {
+      "name": {
+        "es": "Tiempo por expediente",
+        "en": "Time per case"
+      },
+      "how": {
+        "es": "Cronometrar de la subida al borrador (sistema) y, aparte, el tiempo de revisión humana con un cronómetro.",
+        "en": "Time it from upload to draft (system) and, separately, the human review time with a stopwatch."
+      },
+      "baseline": {
+        "es": "El checklist manual con los mismos expedientes.",
+        "en": "The manual checklist with the same cases."
+      },
+      "target": {
+        "es": "Borrador en menos de 2 minutos",
+        "en": "Draft in under 2 minutes"
+      },
+      "result": {
+        "es": "Sistema: 1.06 s como máximo; revisión humana: aún sin medir",
+        "en": "System: 1.06 s at most; human review: not yet measured"
+      }
+    },
+    {
+      "name": {
+        "es": "Costo por expediente",
+        "en": "Cost per case"
+      },
+      "how": {
+        "es": "Minutos de revisión por la tarifa del analista, más el costo del servidor, contra los minutos del proceso manual.",
+        "en": "Review minutes times the analyst's rate, plus server cost, against the minutes of the manual process."
+      },
+      "baseline": {
+        "es": "El proceso manual medido con el checklist.",
+        "en": "The manual process measured with the checklist."
+      },
+      "target": {
+        "es": "Menor que el manual",
+        "en": "Lower than manual"
+      },
+      "result": {
+        "es": "Sin medir: depende de las mediciones de tiempo con personas reales",
+        "en": "Not measured: it depends on time measurements with real people"
+      }
+    }
+  ],
+  "metricsNote": {
+    "es": "Los resultados salen del corpus sintético que generó este mismo proyecto, así que prueban que las reglas hacen lo que dicen, no que acierten con facturas reales.",
+    "en": "The results come from the synthetic corpus this same project generated, so they show the rules do what they say, not that they get real invoices right."
+  },
+  "existing": {
+    "items": [
+      {
+        "name": "VUCEM",
+        "url": "https://www.ventanillaunica.gob.mx/vucem/index.html",
+        "what": {
+          "es": "El portal oficial donde se captura y transmite el formato E2. Es el canal de presentación, no una herramienta de revisión previa de los documentos.",
+          "en": "The official portal where the E2 form is keyed in and filed. It is the filing channel, not a tool for reviewing the documents beforehand."
+        }
+      },
+      {
+        "name": "Camtom",
+        "url": "https://www.camtomx.com/academy/como-automatizar-mve-camtom",
+        "what": {
+          "es": "Producto comercial: lee la factura con IA, prellena el borrador del E2 con los incrementables calculados, permite revisarlo y, con la e.firma del importador, lo firma y lo transmite a VUCEM. En las páginas que revisé no se describe un cotejo de la factura contra el COVE y los comprobantes con hallazgos por regla.",
+          "en": "Commercial product: reads the invoice with AI, prefills the E2 draft with the add-ons calculated, lets you review it and, with the importer's e-signature, signs and files it with VUCEM. The pages I reviewed do not describe a cross-check of the invoice against the COVE and supporting documents with per-rule findings."
+        }
+      },
+      {
+        "name": "Thomson Reuters ONESOURCE Global Trade",
+        "url": "https://www.thomsonreuters.com/es-mx/help/onesource-global-trade/manifestacion-electronica-valor-mve/manifestacion-electronica-de-valor-mve",
+        "what": {
+          "es": "Módulo de manifestación electrónica de valor: captura y transmisión de la MVe vinculada al pedimento proyectado. La página de visión general que revisé no menciona que valide documentos ni que autocomplete campos.",
+          "en": "Electronic value declaration module: entry and filing of the MVe linked to the projected customs entry. The overview page I reviewed does not mention that it validates documents or autofills fields."
+        }
+      }
+    ],
+    "differentiator": {
+      "es": "El enfoque, no el alcance: esta herramienta solo audita. Lee y coteja los documentos antes de cualquier captura, cita el fundamento de cada hallazgo, usa tolerancia exacta de 0.00 y deja a una persona la decisión. No firma ni transmite, así que no sustituye a una herramienta que sí lo haga; se puede usar antes de ella.",
+      "en": "The approach, not the scope: this tool only audits. It reads and cross-checks the documents before any data entry, cites the basis of each finding, uses an exact 0.00 tolerance and leaves the decision to a person. It does not sign or file, so it does not replace a tool that does; it can be used before one."
+    }
+  },
   "risks": [
     {
       "es": "No se verificó un esquema oficial del Formato E2 ni del COVE; el XML de salida se marca como no verificado y el JSON es la salida confiable.",
@@ -199,6 +515,10 @@
     {
       "es": "Probado solo con 50 expedientes sintéticos; facturas reales con formatos distintos bajarán la confianza y pedirán corrección manual.",
       "en": "Tested only on 50 synthetic cases; real invoices in other formats will lower confidence and require manual correction."
+    },
+    {
+      "es": "Las reglas y fechas de la manifestación de valor han cambiado varias veces en 2025 y 2026; hay que confirmar el texto vigente antes de operar.",
+      "en": "The rules and dates for the value declaration changed several times in 2025 and 2026; the current text must be confirmed before operating."
     }
   ],
   "nextFeatures": [
@@ -207,12 +527,66 @@
       "en": "Validate against official schemas and with real invoices."
     },
     {
+      "es": "Medir el tiempo de revisión con personas y un checklist manual.",
+      "en": "Measure review time with people and a manual checklist."
+    },
+    {
       "es": "Notificaciones y recepción por correo.",
       "en": "Notifications and email intake."
     },
     {
       "es": "Conectores a ERP y tableros de analítica.",
       "en": "ERP connectors and analytics dashboards."
+    }
+  ],
+  "sources": [
+    {
+      "title": "Ley Aduanera: arts. 65, 184-A y 184-B (texto vigente, última reforma DOF 19-11-2025; multas actualizadas DOF 27-12-2025)",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LAdua.pdf",
+      "date": "2025-11-19",
+      "type": "oficial"
+    },
+    {
+      "title": "SAT: Séptima Resolución de modificaciones a las Reglas Generales de Comercio Exterior para 2025 y Anexo 2 (regla 1.5.1)",
+      "url": "https://sidof.segob.gob.mx/notas/docFuente/5776301",
+      "date": "2025-12-09",
+      "type": "oficial"
+    },
+    {
+      "title": "Pérez-Llorca: Manifestación de Valor electrónica, principales modificaciones y facilidades aplicables a partir del 1 de octubre de 2026",
+      "url": "https://www.perezllorca.com/wp-content/uploads/2026/09/Nota-Juridica-Manifestacion-de-Valor-electronica-principales-modificaciones-y-facilidades-aplicables-a-partir-del-1-de-octubre-de-2026.pdf",
+      "date": "2026-09-30",
+      "type": "despacho"
+    },
+    {
+      "title": "Trade Law College: Incremento de las sanciones relacionadas con el Acuse de Valor (COVE) en la Reforma a la Ley Aduanera",
+      "url": "https://www.tradelawcollege.edu.mx/single-post/incremento-de-las-sanciones-relacionadas-con-el-acuse-de-valor-cove-en-la-reforma-a-la-ley-aduaner",
+      "date": "2025-11-21",
+      "type": "publicacion"
+    },
+    {
+      "title": "Camtom: 7 errores comunes al llenar la MVE y cómo evitarlos",
+      "url": "https://camtomx.com/blog/mve-errores-comunes-como-evitarlos",
+      "date": "2026-03-04",
+      "type": "proveedor"
+    },
+    {
+      "title": "Camtom: Cómo automatizar la MVE con Camtom, tutorial paso a paso",
+      "url": "https://www.camtomx.com/academy/como-automatizar-mve-camtom",
+      "date": "2026-03-09",
+      "type": "proveedor"
+    },
+    {
+      "title": "Thomson Reuters: MVe, Manifestación Electrónica de Valor, visión general (ONESOURCE Global Trade)",
+      "url": "https://www.thomsonreuters.com/es-mx/help/onesource-global-trade/manifestacion-electronica-valor-mve/manifestacion-electronica-de-valor-mve",
+      "date": null,
+      "type": "proveedor"
+    },
+    {
+      "title": "VUCEM: Ventanilla Única de Comercio Exterior Mexicano (consultado el 2026-10-22)",
+      "url": "https://www.ventanillaunica.gob.mx/vucem/index.html",
+      "date": "2026-10-22",
+      "type": "oficial"
     }
   ],
   "sidebar": {
