@@ -5,7 +5,7 @@
 const i18n = {
     en: {
         // Nav
-        'nav.work': 'Work', 'nav.services': 'Services', 'nav.skills': 'Skills',
+        'a11y.skip': 'Skip to content', 'nav.work': 'Work', 'nav.services': 'Services', 'nav.skills': 'Skills',
         'nav.process': 'Process', 'nav.contact': 'Contact', 'nav.lang': 'ES',
 
         // Hero
@@ -358,7 +358,7 @@ const i18n = {
 
     es: {
         // Nav
-        'nav.work': 'Proyectos', 'nav.services': 'Servicios', 'nav.skills': 'Habilidades',
+        'a11y.skip': 'Saltar al contenido', 'nav.work': 'Proyectos', 'nav.services': 'Servicios', 'nav.skills': 'Habilidades',
         'nav.process': 'Proceso', 'nav.contact': 'Contacto', 'nav.lang': 'EN',
 
         // Hero
@@ -710,7 +710,9 @@ const i18n = {
     }
 };
 
-let currentLang = localStorage.getItem('lang') || 'en';
+// ?lang=es|en (used by links from posts written in one language) wins over the saved choice.
+const urlLang = new URLSearchParams(location.search).get('lang');
+let currentLang = urlLang === 'es' || urlLang === 'en' ? urlLang : localStorage.getItem('lang') || 'en';
 
 function applyTranslations(lang) {
     const dict = i18n[lang];
