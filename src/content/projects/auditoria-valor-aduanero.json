@@ -1,0 +1,245 @@
+{
+  "slug": "auditoria-valor-aduanero",
+  "format": "v2",
+  "listed": true,
+  "draft": false,
+  "date": "2026-10-22",
+  "niche": "import-mx",
+  "title": {
+    "es": "Auditoría del valor en aduana antes de firmar",
+    "en": "Customs value audit before filing"
+  },
+  "subtitle": {
+    "es": "Cruza factura, COVE y comprobantes de flete y seguro, y deja listo un borrador del Formato E2 para que una persona lo revise.",
+    "en": "Cross-checks the invoice, the COVE and freight/insurance documents, and leaves a draft E2 form ready for a person to review."
+  },
+  "tags": [
+    "Import MX",
+    "Compliance",
+    "Human-in-the-loop"
+  ],
+  "demoUrl": "https://demo-auditoria-valor-aduanero.otomatelabs.com",
+  "repoUrl": null,
+  "video": null,
+  "gallery": [
+    {
+      "src": "/projects/auditoria-valor-aduanero/01-expedientes.png",
+      "alt": {
+        "en": "List of cases with their status: ready to approve or with errors to fix",
+        "es": "Lista de expedientes con su estado: listo para aprobar o con errores por corregir"
+      },
+      "caption": {
+        "en": "Every case arrives with its status: ready to approve or with errors to fix.",
+        "es": "Cada expediente llega con su estado: listo para aprobar o con errores por corregir."
+      }
+    },
+    {
+      "src": "/projects/auditoria-valor-aduanero/02-listo.png",
+      "alt": {
+        "en": "Clean case: invoice and COVE cross-checked, add-ons with their basis, ready to approve",
+        "es": "Expediente limpio: factura y COVE cotejados, incrementables con fundamento y listo para aprobar"
+      },
+      "caption": {
+        "en": "A clean case: everything adds up and it is ready for a person to approve.",
+        "es": "Un expediente limpio: todo cuadra y queda listo para que una persona lo apruebe."
+      }
+    },
+    {
+      "src": "/projects/auditoria-valor-aduanero/03-descuadre.png",
+      "alt": {
+        "en": "Red case with the mismatch between the sum of line items and the COVE value flagged in the findings",
+        "es": "Expediente en rojo con el descuadre entre la suma de partidas y el valor del COVE marcado en los hallazgos"
+      },
+      "caption": {
+        "en": "An invoice/COVE mismatch is flagged red and cannot be approved.",
+        "es": "Un descuadre entre factura y COVE se marca en rojo y no se puede aprobar."
+      }
+    },
+    {
+      "src": "/projects/auditoria-valor-aduanero/04-movil.png",
+      "alt": {
+        "en": "The same case on a phone",
+        "es": "El mismo expediente en un teléfono"
+      },
+      "caption": {
+        "en": "It works the same on a phone.",
+        "es": "Se usa igual en el teléfono."
+      }
+    }
+  ],
+  "card": {
+    "icon": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.25\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M9 11l3 3L22 4\"/><path d=\"M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11\"/></svg>",
+    "desc": {
+      "es": "Detecta descuadres entre factura y COVE y fletes mal sumados antes de que lleguen a la manifestación de valor.",
+      "en": "Catches invoice/COVE mismatches and mis-added freight before they reach the value declaration."
+    },
+    "metric": {
+      "es": "6 reglas de revisión",
+      "en": "6 review rules"
+    },
+    "tech": "FastAPI · PostgreSQL · HTMX · Docker"
+  },
+  "problem": {
+    "statement": [
+      {
+        "es": "El valor en aduana no es solo el precio de la factura: según el Incoterm pactado, hay que sumar fletes, seguros y gastos conexos, y no sumarlos dos veces cuando el precio ya los incluye.",
+        "en": "Customs value is not just the invoice price: depending on the agreed Incoterm, freight, insurance and related costs must be added, and not added twice when the price already includes them."
+      },
+      {
+        "es": "Hoy esa revisión es manual: alguien abre la factura, el COVE y los comprobantes, y compara cifras a ojo antes de capturar la manifestación de valor. Un descuadre de centavos, un Tax ID faltante o una moneda distinta entre documentos se descubre tarde.",
+        "en": "Today that check is manual: someone opens the invoice, the COVE and the supporting documents and compares figures by eye before filing the value declaration. A cents-level mismatch, a missing Tax ID or a different currency between documents is found late."
+      }
+    ],
+    "evidence": [
+      {
+        "claim": {
+          "es": "La Ley Aduanera dispone que el valor de transacción comprende, además del precio pagado, los gastos de transporte, seguros y gastos conexos hasta el punto previsto en el artículo 56, fracción I, cuando corran a cargo del importador y no estén incluidos en el precio.",
+          "en": "The Customs Law states that the transaction value includes, besides the price paid, transport, insurance and related costs up to the point set by article 56, section I, when borne by the importer and not already included in the price."
+        },
+        "source": "Ley Aduanera, art. 65, fracción I, inciso d) (texto vigente, última reforma DOF 19-11-2025)",
+        "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LAdua.pdf",
+        "date": "2025-11-19",
+        "type": "oficial"
+      }
+    ]
+  },
+  "process": {
+    "before": [
+      {
+        "text": {
+          "es": "Abrir factura, COVE y comprobantes y localizar cada cifra",
+          "en": "Open the invoice, COVE and supporting documents and locate each figure"
+        },
+        "minutes": 15,
+        "assumption": true
+      },
+      {
+        "text": {
+          "es": "Comparar totales, moneda, Incoterm y Tax ID entre documentos",
+          "en": "Compare totals, currency, Incoterm and Tax ID across documents"
+        },
+        "minutes": 15,
+        "assumption": true
+      },
+      {
+        "text": {
+          "es": "Calcular incrementables según el Incoterm y capturar el borrador",
+          "en": "Work out the add-ons for the Incoterm and key in the draft"
+        },
+        "minutes": 20,
+        "assumption": true
+      }
+    ],
+    "after": [
+      {
+        "text": {
+          "es": "Subir los documentos; el sistema los lee, aplica las 6 reglas y arma el borrador",
+          "en": "Upload the documents; the system reads them, applies the 6 rules and builds the draft"
+        },
+        "minutes": 2,
+        "assumption": true
+      },
+      {
+        "text": {
+          "es": "Revisar hallazgos, corregir campos de baja confianza y aprobar",
+          "en": "Review findings, fix low-confidence fields and approve"
+        },
+        "minutes": 10,
+        "assumption": true
+      }
+    ]
+  },
+  "built": {
+    "summary": {
+      "es": "Una aplicación que recibe factura (XML o PDF), COVE (XML) y comprobantes de flete y seguro, y devuelve un semáforo, los hallazgos con su fundamento y un borrador del Formato E2 en JSON y XML, con reporte en PDF.",
+      "en": "An application that takes the invoice (XML or PDF), the COVE (XML) and freight/insurance documents, and returns a traffic light, findings with their basis and a draft E2 form in JSON and XML, plus a PDF report."
+    },
+    "bullets": [
+      {
+        "es": "Seis reglas: incrementables por Incoterm, no duplicación, tolerancia exacta de 0.00, datos obligatorios, consistencia factura-COVE y calidad de extracción.",
+        "en": "Six rules: Incoterm add-ons, no double counting, an exact 0.00 tolerance, mandatory data, invoice-COVE consistency and extraction quality."
+      },
+      {
+        "es": "Aritmética decimal estricta y cada campo extraído con su nivel de confianza.",
+        "en": "Strict decimal arithmetic and every extracted field carries its confidence level."
+      },
+      {
+        "es": "Una persona aprueba antes de exportar; aprobar exige notas en los hallazgos amarillos y confirmar los campos dudosos.",
+        "en": "A person approves before export; approving requires notes on yellow findings and confirming doubtful fields."
+      },
+      {
+        "es": "Bitácora de auditoría de solo-agregar y originales inmutables con hash SHA-256.",
+        "en": "Append-only audit log and immutable originals with SHA-256 hashes."
+      }
+    ]
+  },
+  "notAutomated": [
+    {
+      "es": "No firma ni transmite a VUCEM: la e.firma queda siempre con su titular.",
+      "en": "It never signs or files with VUCEM: the e-signature always stays with its holder."
+    },
+    {
+      "es": "No clasifica mercancías ni da asesoría legal: apoya, no sustituye, el criterio del agente aduanal.",
+      "en": "It does not classify goods or give legal advice: it supports, not replaces, the customs broker's judgment."
+    },
+    {
+      "es": "No decide si un caso dudoso procede: lo marca y lo deja a una persona.",
+      "en": "It does not decide whether a doubtful case proceeds: it flags it and leaves it to a person."
+    }
+  ],
+  "risks": [
+    {
+      "es": "No se verificó un esquema oficial del Formato E2 ni del COVE; el XML de salida se marca como no verificado y el JSON es la salida confiable.",
+      "en": "No official schema for the E2 form or the COVE was verified; the output XML is marked unverified and the JSON is the reliable output."
+    },
+    {
+      "es": "La tabla de Incoterms es una interpretación del artículo 65 y debe validarla un especialista aduanero antes de usarse con operaciones reales.",
+      "en": "The Incoterm table is an interpretation of article 65 and must be validated by a customs specialist before real use."
+    },
+    {
+      "es": "Probado solo con 50 expedientes sintéticos; facturas reales con formatos distintos bajarán la confianza y pedirán corrección manual.",
+      "en": "Tested only on 50 synthetic cases; real invoices in other formats will lower confidence and require manual correction."
+    }
+  ],
+  "nextFeatures": [
+    {
+      "es": "Validar contra los esquemas oficiales y con facturas reales.",
+      "en": "Validate against official schemas and with real invoices."
+    },
+    {
+      "es": "Notificaciones y recepción por correo.",
+      "en": "Notifications and email intake."
+    },
+    {
+      "es": "Conectores a ERP y tableros de analítica.",
+      "en": "ERP connectors and analytics dashboards."
+    }
+  ],
+  "sidebar": {
+    "client": {
+      "es": "Agencias aduanales y áreas de comercio exterior",
+      "en": "Customs brokerages and foreign-trade teams"
+    },
+    "duration": {
+      "es": "MVP",
+      "en": "MVP"
+    },
+    "role": {
+      "es": "Diseño y desarrollo",
+      "en": "Design and development"
+    },
+    "metric": {
+      "value": "R1–R6",
+      "label": {
+        "es": "reglas de revisión",
+        "en": "review rules"
+      }
+    },
+    "stack": [
+      "FastAPI",
+      "PostgreSQL",
+      "HTMX",
+      "Docker"
+    ]
+  }
+}
