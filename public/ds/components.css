@@ -1,0 +1,219 @@
+/* Otomate signature components (v0.2). Pure CSS on top of tokens.css; no framework needed.
+   ot-grid       visible registration grid as a surface style
+   ot-ledger     ledger rows instead of cards (mono tabular identifiers)
+   ot-prov       provenance mark on every figure: where a number comes from
+   ot-diff       side-by-side document comparison with differences marked by shape, not only by color
+   ot-decision   "decision point": where a person approves or asks for changes
+   ot-flow       animated flow on a single clock (driven by flow.js)
+*/
+
+/* ---- shared ------------------------------------------------------------------------------------------------- */
+.ot-mono {
+  font-family: var(--ot-font-mono);
+  font-variant-numeric: tabular-nums slashed-zero;
+  letter-spacing: 0;
+}
+
+.ot-skip {
+  position: absolute;
+  left: var(--ot-space-4);
+  top: -4rem;
+  z-index: 10;
+  padding: var(--ot-space-2) var(--ot-space-4);
+  border-radius: var(--ot-radius-md);
+  background: var(--foreground);
+  color: var(--background);
+  font-size: var(--ot-text-body-sm);
+  transition: top var(--ot-duration-fast) var(--ot-ease-smooth);
+}
+.ot-skip:focus-visible { top: var(--ot-space-4); }
+
+/* Section label: used sparingly, once per page region, not above every heading. */
+.ot-label {
+  font-family: var(--ot-font-mono);
+  font-size: var(--ot-text-caption);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ot-text-tertiary);
+}
+
+/* ---- visible grid ------------------------------------------------------------------------------------------- */
+.ot-grid {
+  --ot-grid-step: 24px;
+  position: relative;
+  background-image:
+    linear-gradient(to right, var(--ot-border-subtle) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--ot-border-subtle) 1px, transparent 1px);
+  background-size: var(--ot-grid-step) var(--ot-grid-step);
+  background-position: -1px -1px;
+}
+/* Registration ticks on the four corners of a framed area. */
+.ot-frame { position: relative; border: 1px solid var(--ot-border); border-radius: var(--ot-radius-sm); background: var(--background); }
+.ot-frame::before, .ot-frame::after {
+  content: "";
+  position: absolute;
+  width: 11px; height: 11px;
+  border: 1px solid var(--ot-text-tertiary);
+  pointer-events: none;
+}
+.ot-frame::before { top: -6px; left: -6px; border-right: 0; border-bottom: 0; }
+.ot-frame::after { right: -6px; bottom: -6px; border-left: 0; border-top: 0; }
+
+/* ---- ledger ------------------------------------------------------------------------------------------------- */
+.ot-ledger { width: 100%; border-collapse: collapse; font-size: var(--ot-text-body-sm); }
+.ot-ledger caption {
+  text-align: left;
+  padding: var(--ot-space-3) var(--ot-space-4);
+  font-family: var(--ot-font-mono);
+  font-size: var(--ot-text-caption);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ot-text-secondary);
+  border-bottom: 1px solid var(--ot-border);
+}
+.ot-ledger th {
+  text-align: left;
+  font-weight: 500;
+  font-size: var(--ot-text-caption);
+  color: var(--ot-text-tertiary);
+  padding: var(--ot-space-2) var(--ot-space-4);
+  border-bottom: 1px solid var(--ot-border);
+  white-space: nowrap;
+}
+.ot-ledger td { padding: var(--ot-space-3) var(--ot-space-4); border-bottom: 1px solid var(--ot-border-subtle); vertical-align: baseline; }
+.ot-ledger tbody tr { transition: background-color var(--ot-duration-fast) ease; }
+.ot-ledger tbody tr:hover { background: var(--ot-surface); }
+.ot-ledger td.num, .ot-ledger th.num { text-align: right; }
+.ot-ledger .id { font-family: var(--ot-font-mono); font-variant-numeric: tabular-nums slashed-zero; color: var(--ot-text-secondary); }
+.ot-ledger tfoot td { border-bottom: 0; border-top: 1px solid var(--ot-border); font-weight: 500; }
+
+/* Row state: icon + word + color, never color alone. */
+.ot-state { display: inline-flex; align-items: center; gap: var(--ot-space-2); font-size: var(--ot-text-caption); font-weight: 500; white-space: nowrap; }
+.ot-state::before { content: ""; width: 12px; height: 12px; flex: none; background: currentColor; }
+.ot-state[data-state="ok"] { color: var(--ot-success); }
+.ot-state[data-state="ok"]::before { clip-path: polygon(14% 52%, 0 66%, 38% 100%, 100% 22%, 86% 8%, 38% 72%); }
+.ot-state[data-state="review"] { color: var(--ot-warning); }
+.ot-state[data-state="review"]::before { clip-path: polygon(50% 0, 100% 100%, 0 100%); }
+.ot-state[data-state="risk"] { color: var(--ot-danger); }
+.ot-state[data-state="risk"]::before { clip-path: polygon(30% 0, 70% 0, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0 70%, 0 30%); }
+
+/* ---- provenance mark ---------------------------------------------------------------------------------------- */
+.ot-prov {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ot-space-1);
+  padding: 1px var(--ot-space-2);
+  border: 1px solid var(--ot-border);
+  border-radius: var(--ot-radius-sm);
+  font-family: var(--ot-font-mono);
+  font-size: 0.6875rem;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ot-text-secondary);
+  white-space: nowrap;
+}
+.ot-prov[data-kind="verified"] { color: var(--ot-success); border-color: currentColor; }
+.ot-prov[data-kind="assumption"] { color: var(--ot-warning); border-style: dashed; border-color: currentColor; }
+.ot-prov[data-kind="synthetic"] { color: var(--ot-info); border-color: currentColor; }
+
+/* ---- document comparison ------------------------------------------------------------------------------------ */
+.ot-diff { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--ot-border); border-radius: var(--ot-radius-sm); }
+.ot-diff > section { padding: var(--ot-space-4); min-width: 0; }
+.ot-diff > section + section { border-left: 1px solid var(--ot-border); }
+.ot-diff h3 { font: 500 var(--ot-text-caption) var(--ot-font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--ot-text-secondary); margin-bottom: var(--ot-space-3); }
+.ot-diff dl { display: grid; grid-template-columns: auto 1fr; gap: var(--ot-space-2) var(--ot-space-4); font-size: var(--ot-text-body-sm); }
+.ot-diff dt { color: var(--ot-text-tertiary); }
+.ot-diff dd { font-family: var(--ot-font-mono); font-variant-numeric: tabular-nums slashed-zero; text-align: right; }
+/* A difference: underline + marker glyph + background tint (three signals). */
+.ot-diff dd[data-diff] { background: var(--ot-danger-bg); color: var(--ot-danger); text-decoration: underline wavy; text-underline-offset: 3px; padding-inline: var(--ot-space-2); }
+.ot-diff dd[data-diff]::before { content: "\0394\00a0"; text-decoration: none; display: inline-block; }
+
+/* ---- decision point ----------------------------------------------------------------------------------------- */
+.ot-decision { border: 1px solid var(--ot-text-secondary); border-radius: var(--ot-radius-sm); padding: var(--ot-space-6); display: grid; gap: var(--ot-space-4); }
+.ot-decision header { display: flex; flex-wrap: wrap; gap: var(--ot-space-3); align-items: baseline; justify-content: space-between; }
+.ot-decision h3 { font: 300 var(--ot-text-h3) / 1.3 var(--ot-font-display); }
+.ot-decision p { max-width: 62ch; color: var(--ot-text-secondary); }
+.ot-decision .actions { display: flex; flex-wrap: wrap; gap: var(--ot-space-3); }
+.ot-decision .trail { font-family: var(--ot-font-mono); font-size: var(--ot-text-caption); color: var(--ot-text-tertiary); border-top: 1px dashed var(--ot-border); padding-top: var(--ot-space-3); }
+
+/* ---- buttons (44px touch target) ---------------------------------------------------------------------------- */
+.ot-btn {
+  min-height: 44px;
+  padding: 0 var(--ot-space-6);
+  border-radius: var(--ot-radius-md);
+  border: 0;
+  font: 500 var(--ot-text-body-sm) var(--ot-font-body);
+  cursor: pointer;
+  transition: transform var(--ot-duration-fast) var(--ot-ease-smooth), background-color var(--ot-duration-fast) ease;
+}
+.ot-btn:hover { transform: translateY(-2px); }
+.ot-btn:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+.ot-btn[data-variant="primary"] { background: var(--primary); color: var(--primary-foreground); }
+.ot-btn[data-variant="ghost"] { background: transparent; color: var(--foreground); box-shadow: inset 0 0 0 1.5px var(--ot-border); }
+.ot-btn[data-variant="ghost"]:hover { background: var(--ot-surface); }
+
+/* ---- animated flow: one clock ------------------------------------------------------------------------------- */
+/* Cycle = 5.2s. flow.js adds .run to start/restart; every animation below shares that class, so nothing drifts. */
+.ot-flow { --cycle: 5.2s; --wire-w: 56px; display: grid; grid-template-columns: minmax(0, 1fr) var(--wire-gap, 56px) minmax(0, 1.1fr) var(--wire-gap, 56px) minmax(0, 1fr) var(--wire-gap, 56px) minmax(0, 1fr); align-items: stretch; gap: 0; }
+.ot-flow .col { display: grid; grid-template-rows: repeat(3, minmax(56px, auto)); gap: var(--ot-space-3); align-items: center; }
+.ot-flow .col.single { grid-template-rows: 1fr; }
+.ot-flow .node { position: relative; padding: var(--ot-space-3) var(--ot-space-4); border: 1px solid var(--ot-border); border-radius: var(--ot-radius-sm); background: var(--ot-surface); font-size: var(--ot-text-body-sm); }
+.ot-flow .node small { display: block; font-family: var(--ot-font-mono); font-size: 0.6875rem; letter-spacing: 0.04em; color: var(--ot-text-tertiary); text-transform: uppercase; }
+.ot-flow .core { border-color: var(--ot-brand-coral); }
+.ot-flow .human { border-color: var(--foreground); }
+.ot-flow .wire { position: relative; align-self: center; height: 0; border-top: 1px dashed var(--ot-text-tertiary); margin-block: 0; }
+.ot-flow .packet {
+  position: absolute; left: 0; top: -9px;
+  padding: 0 var(--ot-space-2);
+  border-radius: var(--ot-radius-pill);
+  background: var(--primary); color: var(--primary-foreground);
+  font: 500 0.625rem/18px var(--ot-font-mono);
+  opacity: 0;
+  white-space: nowrap;
+}
+.ot-flow.run .packet { animation: ot-travel 0.9s var(--ot-ease-smooth) both; animation-delay: var(--d, 0s); }
+@keyframes ot-travel {
+  0% { opacity: 0; transform: translateX(0); }
+  15% { opacity: 1; }
+  85% { opacity: 1; }
+  100% { opacity: 0; transform: translateX(calc(var(--wire-w) - 28px)); }
+}
+.ot-flow.run .in-1 .packet { --d: 0s; }
+.ot-flow.run .in-2 .packet { --d: 0.08s; }
+.ot-flow.run .in-3 .packet { --d: 0.16s; }
+.ot-flow.run .w-core .packet { --d: 1.1s; animation-duration: 0.45s; }
+.ot-flow.run .w-find .packet { --d: 1.95s; animation-duration: 0.45s; }
+.ot-flow.run .w-human .packet { --d: 2.7s; animation-duration: 0.6s; }
+
+.ot-flow .glow { transition: none; }
+.ot-flow.run .glow { animation: ot-glow 0.7s var(--ot-ease-smooth) both; animation-delay: var(--g, 0s); }
+@keyframes ot-glow { 0%, 100% { box-shadow: 0 0 0 0 transparent; } 40% { box-shadow: 0 0 0 4px var(--ot-brand-bg), 0 0 0 5px var(--ot-brand-coral); } }
+.ot-flow.run .in-1 .glow, .ot-flow.run .glow.i1 { --g: 0.05s; }
+.ot-flow.run .glow.i2 { --g: 0.13s; }
+.ot-flow.run .glow.i3 { --g: 0.21s; }
+.ot-flow.run .core.glow { --g: 1.5s; }
+.ot-flow.run .glow.f1 { --g: 2.4s; }
+.ot-flow.run .glow.f2 { --g: 2.4s; }
+.ot-flow.run .human.glow { --g: 3.3s; animation-duration: 0.9s; }
+
+/* The finding that needs a person lights up, then the decision node confirms. */
+.ot-flow .finding[data-state="risk"] .ot-state, .ot-flow .finding[data-state="review"] .ot-state { opacity: 0.55; }
+.ot-flow.run .finding[data-state="risk"] .ot-state, .ot-flow.run .finding[data-state="review"] .ot-state { animation: ot-pick 0.5s var(--ot-ease-smooth) 2.4s both; }
+@keyframes ot-pick { from { opacity: 0.55; } to { opacity: 1; } }
+
+@media (max-width: 768px) {
+  .ot-flow { grid-template-columns: 1fr; gap: var(--ot-space-2); }
+  .ot-flow .wire { height: 20px; width: 0; border-top: 0; border-left: 1px dashed var(--ot-text-tertiary); margin-inline: var(--ot-space-6); }
+  .ot-flow .packet { display: none; }
+  .ot-flow .col, .ot-flow .col.single { grid-template-rows: none; gap: var(--ot-space-2); }
+  .ot-flow .col > .wire:not(:first-child) { display: none; }
+  .ot-diff { grid-template-columns: 1fr; }
+  .ot-diff > section + section { border-left: 0; border-top: 1px solid var(--ot-border); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ot-flow .packet { display: none; }
+  .ot-flow.run .glow, .ot-flow.run .finding .ot-state { animation: none; opacity: 1; }
+  .ot-btn:hover, .ot-ledger tbody tr { transform: none; transition: none; }
+}
