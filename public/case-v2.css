@@ -41,20 +41,14 @@ html[lang="es"] [data-lang="en"] {
 .case-evidence li {
     counter-increment: ev;
     position: relative;
-    padding: var(--space-4) var(--space-4) var(--space-4) var(--space-12);
+    padding: var(--space-4) var(--space-6);
     background: var(--color-surface);
     border: 1px solid var(--color-border-subtle);
     border-radius: var(--radius-lg);
 }
 
 .case-evidence li::before {
-    content: counter(ev);
-    position: absolute;
-    left: var(--space-4);
-    top: var(--space-4);
-    font-family: var(--font-display);
-    font-weight: 300;
-    color: var(--color-brand-coral);
+    content: none;
 }
 
 .case-evidence p {
@@ -120,6 +114,7 @@ html[lang="es"] [data-lang="en"] {
 }
 
 .case-step-min {
+    white-space: nowrap;
     margin-left: var(--space-2);
     color: var(--color-text-secondary);
     font-variant-numeric: tabular-nums;
@@ -177,5 +172,332 @@ html[lang="es"] [data-lang="en"] {
 
     .case-human {
         padding: var(--space-6);
+    }
+}
+
+/* ---- expediente structure ---- */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.case-score {
+    display: inline-flex;
+    align-items: baseline;
+    gap: var(--space-3);
+    margin-top: var(--space-6);
+}
+
+.case-score-label {
+    font-size: var(--text-caption);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+}
+
+.case-score-value {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: var(--text-h2);
+}
+
+.case-score-value small {
+    font-size: var(--text-body);
+    color: var(--color-text-secondary);
+}
+
+.case-problem {
+    display: grid;
+    grid-template-columns: minmax(8rem, 11rem) 1fr;
+    gap: var(--space-4) var(--space-6);
+    margin: var(--space-6) 0;
+}
+
+.case-problem dt {
+    font-size: var(--text-caption);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-brand-coral);
+    padding-top: 0.2em;
+}
+
+.case-problem dd {
+    margin: 0;
+}
+
+.case-ref,
+.case-flag {
+    text-decoration: none;
+}
+
+.case-flag-measured {
+    background: var(--color-surface-raised);
+    color: var(--color-text-primary);
+}
+
+.case-note {
+    font-size: var(--text-body-sm);
+    color: var(--color-text-secondary);
+}
+
+.case-human-head {
+    font-family: var(--font-body);
+    font-size: var(--text-caption);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin: var(--space-6) 0 var(--space-2);
+}
+
+.case-io {
+    display: grid;
+    gap: 0;
+}
+
+.case-io ul {
+    padding-left: var(--space-4);
+    display: grid;
+    gap: var(--space-2);
+    font-size: var(--text-body-sm);
+}
+
+.case-io .case-subhead {
+    margin-top: var(--space-6);
+}
+
+.case-metrics {
+    display: grid;
+    gap: var(--space-4);
+    margin: var(--space-6) 0;
+}
+
+.case-metric {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+}
+
+.case-metric h3 {
+    margin: 0 0 var(--space-4);
+    font-size: var(--text-body);
+}
+
+.case-metric dl {
+    display: grid;
+    grid-template-columns: minmax(7rem, 9rem) 1fr;
+    gap: var(--space-2) var(--space-4);
+    margin: 0;
+    font-size: var(--text-body-sm);
+}
+
+.case-metric dt {
+    color: var(--color-text-secondary);
+}
+
+.case-metric dd {
+    margin: 0;
+}
+
+.case-metric-result {
+    font-weight: 500;
+}
+
+.case-existing {
+    display: grid;
+    gap: var(--space-4);
+    padding-left: var(--space-4);
+}
+
+.case-existing a {
+    font-weight: 500;
+}
+
+.case-sources {
+    display: grid;
+    gap: var(--space-3);
+    padding-left: var(--space-6);
+    font-size: var(--text-body-sm);
+    overflow-wrap: anywhere;
+}
+
+.case-sources li:target {
+    outline: 1px solid var(--color-brand-coral);
+    outline-offset: 4px;
+}
+
+/* ---- enlargeable gallery ---- */
+.case-gallery {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-4);
+    margin: var(--space-8) 0;
+}
+
+.case-gallery .project-image {
+    margin: 0;
+}
+
+.case-zoom {
+    position: relative;
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    background: var(--color-surface);
+    overflow: hidden;
+    cursor: zoom-in;
+    color: inherit;
+}
+
+/* Thumbnails show the top of each screenshot at a readable size; the viewer shows the whole image. */
+.case-zoom img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    object-position: top;
+}
+
+.case-zoom-hint {
+    position: absolute;
+    right: var(--space-3);
+    bottom: var(--space-3);
+    width: 2.25rem;
+    height: 2.25rem;
+    display: grid;
+    place-items: center;
+    border-radius: var(--radius-pill);
+    background: var(--color-bg);
+    color: var(--color-text-primary);
+    border: 1px solid var(--color-border);
+    font-size: 1.1rem;
+}
+
+.case-zoom:focus-visible {
+    outline: 2px solid var(--color-brand-coral);
+    outline-offset: 2px;
+}
+
+.case-lightbox {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    max-width: none;
+    height: 100dvh;
+    max-height: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: var(--color-bg);
+    color: var(--color-text-primary);
+}
+
+.case-lightbox[open] {
+    display: flex;
+    flex-direction: column;
+}
+
+.case-lightbox::backdrop {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.case-lightbox-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3) var(--space-6);
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-3) var(--space-4);
+    border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.case-lightbox-caption {
+    margin: 0;
+    flex: 1 1 18rem;
+    font-size: var(--text-body-sm);
+    color: var(--color-text-secondary);
+}
+
+.case-lightbox-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+}
+
+.case-lightbox-actions button,
+.case-lightbox-actions a {
+    font: inherit;
+    font-size: var(--text-body-sm);
+    color: var(--color-text-primary);
+    background: transparent;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-pill);
+    padding: var(--space-2) var(--space-4);
+    min-height: 2.75rem;
+    text-decoration: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+}
+
+.case-lightbox-actions [aria-pressed="true"] {
+    background: var(--color-surface-raised);
+}
+
+.case-lightbox-close {
+    border-color: var(--color-brand-coral) !important;
+}
+
+.case-lightbox-stage {
+    flex: 1;
+    overflow: auto;
+    display: grid;
+    justify-items: center;
+    align-items: start;
+    padding: var(--space-4);
+    -webkit-overflow-scrolling: touch;
+}
+
+.case-lightbox-stage img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    cursor: zoom-in;
+}
+
+.case-lightbox[data-full] .case-lightbox-stage {
+    justify-items: start;
+}
+
+.case-lightbox[data-full] .case-lightbox-stage img {
+    max-width: none;
+    cursor: zoom-out;
+}
+
+@media (max-width: 768px) {
+    .case-gallery {
+        grid-template-columns: 1fr;
+    }
+
+    .case-problem,
+    .case-metric dl {
+        grid-template-columns: 1fr;
+        gap: var(--space-1);
+    }
+
+    .case-problem dd {
+        margin-bottom: var(--space-3);
+    }
+
+    .case-io {
+        grid-template-columns: 1fr;
+        gap: 0;
     }
 }
