@@ -1,0 +1,67 @@
+{
+  "slug": "ejemplo-v2",
+  "format": "v2",
+  "draft": true,
+  "listed": true,
+  "date": "2026-10-21",
+  "niche": "import-mx",
+  "title": { "es": "EJEMPLO · Validador previo de MVE", "en": "EXAMPLE · Pre-filing MVE validator" },
+  "subtitle": {
+    "es": "Plantilla de muestra con datos de relleno. Así se verá un caso generado por el pipeline.",
+    "en": "Sample template with placeholder data. This is how a pipeline-generated case will look."
+  },
+  "tags": ["Import MX", "Automation", "Human-in-the-loop"],
+  "demoUrl": "https://demo-ejemplo.otomatelabs.com",
+  "repoUrl": null,
+  "video": null,
+  "gallery": [],
+  "card": {
+    "icon": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.25\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M9 11l3 3L22 4\"/><path d=\"M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11\"/></svg>",
+    "desc": { "es": "Texto de ejemplo para la tarjeta del índice.", "en": "Example text for the index card." },
+    "metric": { "es": "Métrica de ejemplo", "en": "Example metric" },
+    "tech": "Next.js · FastAPI · Postgres"
+  },
+  "problem": {
+    "statement": [
+      { "es": "Párrafo de ejemplo: quién sufre el problema, qué proceso manual lo causa y cuál es la consecuencia.", "en": "Example paragraph: who suffers the problem, which manual process causes it and what the consequence is." }
+    ],
+    "evidence": [
+      {
+        "claim": { "es": "Afirmación de ejemplo. En un caso real cada afirmación enlaza a una fuente VERIFICADA.", "en": "Example claim. In a real case every claim links to a VERIFIED source." },
+        "source": "Fuente de ejemplo (placeholder)",
+        "url": "https://example.com",
+        "date": "2026-10-01",
+        "type": "oficial"
+      }
+    ]
+  },
+  "process": {
+    "before": [
+      { "text": { "es": "Paso manual 1", "en": "Manual step 1" }, "minutes": 20, "assumption": true },
+      { "text": { "es": "Paso manual 2", "en": "Manual step 2" }, "minutes": 25, "assumption": true }
+    ],
+    "after": [
+      { "text": { "es": "Paso automatizado", "en": "Automated step" }, "minutes": 2, "assumption": true },
+      { "text": { "es": "Revisión humana", "en": "Human review" }, "minutes": 5, "assumption": true }
+    ]
+  },
+  "built": {
+    "summary": { "es": "Resumen de ejemplo de lo construido.", "en": "Example summary of what was built." },
+    "bullets": [
+      { "es": "Componente de ejemplo 1", "en": "Example component 1" },
+      { "es": "Componente de ejemplo 2", "en": "Example component 2" }
+    ]
+  },
+  "notAutomated": [
+    { "es": "La decisión final de transmitir queda en el agente aduanal.", "en": "The final decision to file stays with the customs broker." }
+  ],
+  "risks": [{ "es": "Riesgo de ejemplo.", "en": "Example risk." }],
+  "nextFeatures": [{ "es": "Función futura de ejemplo.", "en": "Example future feature." }],
+  "sidebar": {
+    "client": { "es": "Ejemplo (ICP)", "en": "Example (ICP)" },
+    "duration": { "es": "2 semanas (MVP)", "en": "2 weeks (MVP)" },
+    "role": { "es": "Automatización", "en": "Automation" },
+    "metric": { "value": "00%", "label": { "es": "Métrica de ejemplo", "en": "Example metric" } },
+    "stack": ["Next.js", "FastAPI", "Postgres"]
+  }
+}

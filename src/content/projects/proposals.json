@@ -1,0 +1,49 @@
+{
+  "slug": "proposals",
+  "format": "legacy",
+  "listed": true,
+  "pageTitle": "Automated Client Proposal Generation   Otomate Labs",
+  "title": "Generación Automatizada de Propuestas para Clientes",
+  "subtitle": "Form-triggered system dynamically generating personalized PDF proposals with legal scope, auto-calculated pricing, and payment links, reducing proposal creation time by 40%.",
+  "tags": [
+    "Automation",
+    "Documents",
+    "CRM"
+  ],
+  "card": {
+    "order": 8,
+    "icon": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.25\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z\"/><polyline points=\"14 2 14 8 20 8\"/><line x1=\"16\" y1=\"13\" x2=\"8\" y2=\"13\"/><line x1=\"16\" y1=\"17\" x2=\"8\" y2=\"17\"/><polyline points=\"10 9 9 9 8 9\"/></svg>",
+    "tags": [
+      "Automation",
+      "Documents",
+      "CRM"
+    ],
+    "title": {
+      "key": "work.proposals.title",
+      "text": "Automated Client Proposal Generation"
+    },
+    "desc": {
+      "key": "work.proposals.desc",
+      "text": "Form-triggered system dynamically generating personalized PDF proposals with legal scope, auto-calculated pricing, and payment links. Integrated with Notion/Airtable for pipeline management."
+    },
+    "metric": {
+      "key": "work.proposals.metric",
+      "text": "40% faster proposals"
+    },
+    "tech": {
+      "key": "work.proposals.tech",
+      "text": "n8n · Notion · Airtable · PDF"
+    },
+    "cta": {
+      "key": "work.proposals.cta",
+      "text": "View case study →"
+    }
+  },
+  "legacy": {
+    "heroAttrs": " data-animate=\"fade-up\" data-duration=\"900\"",
+    "heroHtml": "\n            <a href=\"/#work\" class=\"project-back\" data-i18n=\"project.back\">\n                <svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><line x1=\"19\" y1=\"12\" x2=\"5\" y2=\"12\"/><polyline points=\"12 19 5 12 12 5\"/></svg>\n                Back to projects\n            </a>\n            <div class=\"project-tags\"><span class=\"project-tag\">Automation</span><span class=\"project-tag\">Documents</span><span class=\"project-tag\">CRM</span></div>\n            <h1 class=\"project-title\" data-i18n=\"proposals.title\">Generación Automatizada de Propuestas para Clientes</h1>\n            <p class=\"project-subtitle\" data-i18n=\"proposals.subtitle\">Form-triggered system dynamically generating personalized PDF proposals with legal scope, auto-calculated pricing, and payment links, reducing proposal creation time by 40%.</p>\n        ",
+    "mainHtml": "\n                <h2 data-i18n=\"project.challenge\">The Challenge</h2>\n                <p data-i18n=\"proposals.ch1\">Crear propuestas personalizadas para cada cliente tomaba horas de trabajo manual. Cada propuesta requería copiar y pegar información, calcular precios manualmente, y formatear el documento.</p><p data-i18n=\"proposals.ch2\">El proceso de aprobación era lento: las propuestas se enviaban por email, se imprimían, se firmaban, y se escaneaban. No había trazabilidad del estado de cada propuesta.</p>\n\n                <h2 data-i18n=\"project.built\">What We Built</h2>\n                <p data-i18n=\"proposals.b0\">Diseñamos un sistema end-to-end de generación de propuestas:</p>\n                <ul>\n                    <li data-i18n=\"proposals.b1\">Form trigger que captura los requisitos del cliente y parámetros del proyecto</li><li data-i18n=\"proposals.b2\">Generación dinámica de PDFs personalizados con alcance legal, precios auto-calculados, y links de pago</li><li data-i18n=\"proposals.b3\">Integración con Notion y Airtable para tracking y gestión del pipeline de propuestas</li><li data-i18n=\"proposals.b4\">Notificaciones en Slack para revisión final antes de enviar al cliente</li><li data-i18n=\"proposals.b5\">Sistema de versiones y aprobación con audit trail completo</li>\n                </ul>\n\n                <h2 data-i18n=\"project.results\">Results</h2>\n                <p data-i18n=\"proposals.r1\">Reducción del 40% en tiempo de creación de propuestas. Lo que tomaba 2-3 horas ahora se genera en minutos.</p><p data-i18n=\"proposals.r2\">Proceso de onboarding de clientes acelerado significativamente. Las propuestas se generan, revisan y envían en un flujo continuo.</p><p data-i18n=\"proposals.r3\">Precios consistentes y sin errores gracias a los cálculos automáticos basados en reglas de negocio.</p><p data-i18n=\"proposals.r4\">Trazabilidad completa: cada propuesta tiene un historial de cambios, aprobaciones y estado en Notion/Airtable.</p>\n\n                <h2 data-i18n=\"project.tools\">Tools & Technologies</h2>\n                <ul><li>n8n Workflow Automation</li><li>Notion (Pipeline Management)</li><li>Airtable (Data Storage)</li><li>PDF Generation (Dynamic)</li><li>Slack (Notifications)</li><li>Payment Links Integration</li></ul>\n            ",
+    "sidebarHtml": "\n                <div class=\"project-sidebar-card\">\n                    <h3 class=\"project-sidebar-title\" data-i18n=\"project.details\">Project Details</h3>\n                    <div class=\"project-sidebar-item\">\n                        <div class=\"project-sidebar-label\" data-i18n=\"sidebar.client\">Client</div>\n                        <div class=\"project-sidebar-value\" data-i18n=\"proposals.client\">Sales & Consulting Team</div>\n                    </div>\n                    <div class=\"project-sidebar-item\">\n                        <div class=\"project-sidebar-label\" data-i18n=\"sidebar.duration\">Duration</div>\n                        <div class=\"project-sidebar-value\" data-i18n=\"proposals.duration\">3 weeks</div>\n                    </div>\n                    <div class=\"project-sidebar-item\">\n                        <div class=\"project-sidebar-label\" data-i18n=\"sidebar.role\">Role</div>\n                        <div class=\"project-sidebar-value\" data-i18n=\"proposals.role\">Automation & Integration Engineer</div>\n                    </div>\n                    <div class=\"project-sidebar-item\">\n                        <div class=\"project-sidebar-label\" data-i18n=\"sidebar.metric\">Key Metric</div>\n                        <div class=\"project-metric-highlight\" data-i18n=\"proposals.metricNum\">40%</div>\n                        <div class=\"project-sidebar-value\" data-i18n=\"proposals.metricLabel\">Reduction in proposal creation time</div>\n                    </div>\n                </div>\n            ",
+    "bodyAttrs": " data-animate=\"fade-up\" data-duration=\"900\""
+  }
+}

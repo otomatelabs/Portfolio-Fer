@@ -1,0 +1,29 @@
+---
+import head from '../legacy/project.head.html?raw';
+import top from '../legacy/project.top.html?raw';
+import footer from '../legacy/project.footer.html?raw';
+
+interface Props {
+  title: string;
+  description?: string | null;
+}
+const { title, description } = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{title}</title>
+    {description && <meta name="description" content={description} />}
+    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+    <Fragment set:html={head} />
+    <link rel="stylesheet" href="/case-v2.css">
+</head>
+<body>
+<Fragment set:html={top} />
+<slot />
+<Fragment set:html={footer} />
+    <script is:inline src="/i18n.js"></script>
+    <script is:inline src="/animations.js"></script>
+    <script is:inline src="/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+---
+import ProjectLayout from '../../layouts/ProjectLayout.astro';
+import CaseStudyV2 from '../../components/CaseStudyV2.astro';
+import { getProjects, parseAttrs, type Project } from '../../lib/projects';
+
+export async function getStaticPaths() {
+  const projects = await getProjects();
+  return projects.map((project) => ({ params: { slug: project.data.slug }, props: { project } }));
+}
+
+const { project } = Astro.props as { project: Project };
+const { data } = project;
+const title = data.format === 'legacy' ? data.pageTitle : `${data.title.en} · Otomate Labs`;
+const description = data.format === 'legacy' ? data.subtitle : data.subtitle.en;
+---
+<ProjectLayout title={title} description={description}>
+{data.format === 'legacy' && (
+    <header class="project-hero">
+        <div class="project-hero-bg"></div>
+        <div class="project-hero-content" {...parseAttrs(data.legacy.heroAttrs)}><Fragment set:html={data.legacy.heroHtml} /></div>
+    </header>
+
+    <main class="project-body">
+        <div class="project-body-inner" {...parseAttrs(data.legacy.bodyAttrs)}>
+            <div class="project-main"><Fragment set:html={data.legacy.mainHtml} /></div>
+
+            <aside class="project-sidebar"><Fragment set:html={data.legacy.sidebarHtml} /></aside>
+        </div>
+    </main>
+)}
+{data.format === 'v2' && <CaseStudyV2 data={data} />}
+</ProjectLayout>

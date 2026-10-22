@@ -1,3 +1,6 @@
+> **Desactualizado (2026-10-21).** Este documento describe la paleta magenta anterior. La referencia vigente
+> es el DESIGN.md de [`@otomatelabs/design`](https://github.com/otomatelabs/design), extraído del CSS en producción.
+
 # Design System
 
 ## Overview

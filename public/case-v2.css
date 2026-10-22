@@ -1,0 +1,181 @@
+/* Additions for pipeline-generated case studies (format: v2). Uses the variables defined in styles.css. */
+
+/* Bilingual blocks: i18n.js sets <html lang>; default is English. */
+html:not([lang="es"]) [data-lang="es"],
+html[lang="es"] [data-lang="en"] {
+    display: none;
+}
+
+.case-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-top: var(--space-8);
+}
+
+.case-video video {
+    display: block;
+    width: 100%;
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+}
+
+.case-subhead {
+    font-family: var(--font-body);
+    font-size: var(--text-caption);
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-brand-coral);
+    margin: var(--space-8) 0 var(--space-4);
+}
+
+.case-evidence {
+    list-style: none;
+    padding: 0;
+    counter-reset: ev;
+    display: grid;
+    gap: var(--space-3);
+}
+
+.case-evidence li {
+    counter-increment: ev;
+    position: relative;
+    padding: var(--space-4) var(--space-4) var(--space-4) var(--space-12);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-lg);
+}
+
+.case-evidence li::before {
+    content: counter(ev);
+    position: absolute;
+    left: var(--space-4);
+    top: var(--space-4);
+    font-family: var(--font-display);
+    font-weight: 300;
+    color: var(--color-brand-coral);
+}
+
+.case-evidence p {
+    margin: 0 0 var(--space-2);
+}
+
+.case-evidence a {
+    color: var(--color-text-primary);
+    font-size: var(--text-body-sm);
+}
+
+.case-evidence-meta {
+    display: block;
+    margin-top: var(--space-1);
+    font-size: var(--text-caption);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-text-secondary);
+}
+
+.case-process {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-4);
+    margin: var(--space-6) 0;
+}
+
+.case-process-col {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+}
+
+.case-process-after {
+    border-color: var(--color-brand-coral);
+}
+
+.case-process-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-weight: 500;
+    margin-bottom: var(--space-4);
+}
+
+.case-process-total {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: var(--text-h3);
+    color: var(--color-text-secondary);
+}
+
+.case-process-after .case-process-total {
+    color: var(--color-brand-coral);
+}
+
+.case-process ol {
+    padding-left: var(--space-6);
+    display: grid;
+    gap: var(--space-2);
+    font-size: var(--text-body-sm);
+}
+
+.case-step-min {
+    margin-left: var(--space-2);
+    color: var(--color-text-secondary);
+    font-variant-numeric: tabular-nums;
+}
+
+.case-flag {
+    margin-left: var(--space-2);
+    font-size: var(--text-caption);
+    letter-spacing: 0.05em;
+    padding: 0 var(--space-2);
+    border-radius: var(--radius-pill);
+    background: var(--color-brand-bg);
+    color: var(--color-brand-light);
+}
+
+.case-human {
+    margin: var(--space-12) 0;
+    padding: var(--space-8);
+    border-radius: var(--radius-lg);
+    background: var(--color-accent-block);
+    color: var(--color-accent-block-text);
+}
+
+.case-human h2 {
+    margin-top: 0;
+}
+
+.case-human-sub {
+    color: var(--color-accent-block-sub);
+}
+
+.case-disclaimer {
+    margin-top: var(--space-12);
+    font-size: var(--text-caption);
+    color: var(--color-text-secondary);
+}
+
+.case-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-top: var(--space-2);
+}
+
+.case-sidebar-cta {
+    display: block;
+    text-align: center;
+    margin-top: var(--space-6);
+}
+
+@media (max-width: 768px) {
+    .case-process {
+        grid-template-columns: 1fr;
+    }
+
+    .case-human {
+        padding: var(--space-6);
+    }
+}

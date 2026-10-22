@@ -1,0 +1,60 @@
+---
+// Same markup as the original index.html cards; legacy cards keep their i18n.js keys.
+import T from './T.astro';
+import { projectUrl, type Project } from '../lib/projects';
+
+interface Props {
+  project: Project;
+}
+const { data } = Astro.props.project;
+const href = projectUrl(data.slug);
+const cta = { es: 'Ver caso de estudio →', en: 'View case study →' };
+---
+{data.format === 'legacy' && data.card && (
+                <a href={href} class="work-card-link" data-stagger-child>
+                    <article class="work-card">
+                        <div class="work-card-visual">
+                            <div class="work-card-gradient"></div>
+                            <div class="work-card-icon">
+                                <Fragment set:html={data.card.icon} />
+                            </div>
+                            <div class="work-card-tags">
+                                {data.card.tags.map((tag) => <span class="work-card-tag">{tag}</span>)}
+                            </div>
+                        </div>
+                        <div class="work-card-content">
+                            <h3 class="work-card-title" data-i18n={data.card.title?.key}>{data.card.title?.text}</h3>
+                            <p class="work-card-desc" data-i18n={data.card.desc?.key}>{data.card.desc?.text}</p>
+                            <div class="work-card-meta">
+                                <span class="work-card-metric" data-i18n={data.card.metric?.key}>{data.card.metric?.text}</span>
+                                <span class="work-card-tech" data-i18n={data.card.tech?.key}>{data.card.tech?.text}</span>
+                            </div>
+                            <span class="work-card-arrow" data-i18n={data.card.cta?.key}>{data.card.cta?.text}</span>
+                        </div>
+                    </article>
+                </a>
+)}
+{data.format === 'v2' && (
+                <a href={href} class="work-card-link" data-stagger-child>
+                    <article class="work-card">
+                        <div class="work-card-visual">
+                            <div class="work-card-gradient"></div>
+                            <div class="work-card-icon">
+                                <Fragment set:html={data.card.icon} />
+                            </div>
+                            <div class="work-card-tags">
+                                {data.tags.map((tag) => <span class="work-card-tag">{tag}</span>)}
+                            </div>
+                        </div>
+                        <div class="work-card-content">
+                            <h3 class="work-card-title"><T t={data.title} /></h3>
+                            <p class="work-card-desc"><T t={data.card.desc} /></p>
+                            <div class="work-card-meta">
+                                <span class="work-card-metric"><T t={data.card.metric} /></span>
+                                <span class="work-card-tech">{data.card.tech}</span>
+                            </div>
+                            <span class="work-card-arrow"><T t={cta} /></span>
+                        </div>
+                    </article>
+                </a>
+)}

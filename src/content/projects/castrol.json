@@ -1,0 +1,49 @@
+{
+  "slug": "castrol",
+  "format": "legacy",
+  "listed": true,
+  "pageTitle": "Automatización de Pipeline ETL y BI   Otomate Labs",
+  "title": "Automatización de Pipeline ETL y Business Intelligence",
+  "subtitle": "Automated ETL pipeline for SAP ERP data extraction, reducing reporting time by 80% and enabling monthly sales forecasting with +/- 15% accuracy.",
+  "tags": [
+    "Automation",
+    "BI",
+    "Data Engineering"
+  ],
+  "card": {
+    "order": 0,
+    "icon": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.25\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><ellipse cx=\"12\" cy=\"5\" rx=\"9\" ry=\"3\"/><path d=\"M21 12c0 1.66-4 3-9 3s-9-1.34-9-3\"/><path d=\"M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5\"/></svg>",
+    "tags": [
+      "Automation",
+      "BI",
+      "Data Engineering"
+    ],
+    "title": {
+      "key": "work.castrol.title",
+      "text": "Automatización de Pipeline ETL y Business Intelligence"
+    },
+    "desc": {
+      "key": "work.castrol.desc",
+      "text": "Built an ETL pipeline that cut SAP ERP reporting time by 80% from days to minutes. Enabled monthly sales forecasting with +/- 15% accuracy, preventing stockouts for a Fortune 500 supply chain."
+    },
+    "metric": {
+      "key": "work.castrol.metric",
+      "text": "80% time reduction"
+    },
+    "tech": {
+      "key": "work.castrol.tech",
+      "text": "Power BI · Power Query · SAP"
+    },
+    "cta": {
+      "key": "work.castrol.cta",
+      "text": "View case study →"
+    }
+  },
+  "legacy": {
+    "heroAttrs": " data-animate=\"fade-up\" data-duration=\"900\"",
+    "heroHtml": "\n            <a href=\"/#work\" class=\"project-back\" data-i18n=\"project.back\">\n                <svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><line x1=\"19\" y1=\"12\" x2=\"5\" y2=\"12\"/><polyline points=\"12 19 5 12 12 5\"/></svg>\n                Back to projects\n            </a>\n            <div class=\"project-tags\"><span class=\"project-tag\">Automation</span><span class=\"project-tag\">BI</span><span class=\"project-tag\">Data Engineering</span></div>\n            <h1 class=\"project-title\" data-i18n=\"castrol.title\">Automatización de Pipeline ETL y Business Intelligence</h1>\n            <p class=\"project-subtitle\" data-i18n=\"castrol.subtitle\">Automated ETL pipeline for SAP ERP data extraction, reducing reporting time by 80% and enabling monthly sales forecasting with +/- 15% accuracy.</p>\n        ",
+    "mainHtml": "\n                <h2 data-i18n=\"project.challenge\">The Challenge</h2>\n                <p data-i18n=\"castrol.ch1\">El equipo de ventas comerciales dependía de procesos manuales ineficientes para la consolidación de datos. La extracción de archivos planos desde el ERP (SAP) y su posterior transformación y visualización en presentaciones de PowerPoint consumía múltiples días de trabajo a la semana.</p>\n                <figure class=\"project-image\">\n                    <img src=\"/images/ETL Pipeline Automation.png\" alt=\"ETL Pipeline Automation   Power BI dashboard with sales forecasting\" loading=\"lazy\">\n                    <figcaption>Power BI dashboard automating SAP ERP reporting   from days to minutes</figcaption>\n                </figure>\n                <p data-i18n=\"castrol.ch2\">Esta latencia en los datos impedía la toma de decisiones ágiles, aumentaba el riesgo de errores humanos y dificultaba la generación de pronósticos de ventas precisos para evitar quiebres de stock.</p>\n\n                <h2 data-i18n=\"project.built\">What We Built</h2>\n                <p data-i18n=\"castrol.b1\">Diseñamos y desplegamos un pipeline ETL (Extract, Transform, Load) automatizado:</p>\n                <ul>\n                    <li data-i18n=\"castrol.b.1\">Flujos en Power Query para ingestar, limpiar y transformar exportaciones planas de SAP de manera programática</li>\n                    <li data-i18n=\"castrol.b.2\">Dashboard interactivo en Power BI que centralizó tres fuentes de datos críticas</li>\n                    <li data-i18n=\"castrol.b.3\">Enfoque modular con filtros granulares por SKU, distribuidor y temporalidad</li>\n                    <li data-i18n=\"castrol.b.4\">Eliminación de reportes estáticos individuales en favor de una solución dinámica</li>\n                </ul>\n\n                <h2 data-i18n=\"project.results\">Results</h2>\n                <p data-i18n=\"castrol.r1\">La automatización redujo el tiempo de ciclo de generación de reportes en un 80%, liberando decenas de horas semanales para el equipo. La disponibilidad de datos limpios permitió desarrollar modelos de pronóstico de ventas mensuales con una precisión sostenida de +/- 15%.</p>\n                <p data-i18n=\"castrol.r2\">El sistema fue adoptado por más de 15 usuarios, a quienes capacitamos personalmente para asegurar la mantenibilidad a largo plazo de la solución.</p>\n\n                <h2 data-i18n=\"project.tools\">Tools & Technologies</h2>\n                <ul><li>Power BI & Power Query (M Language)</li><li>SAP ERP (Extracción de datos)</li><li>Modelado de datos relacionales</li><li>Forecasting estadístico</li></ul>\n\n                <h2>Architecture Decisions</h2>\n                <p><strong>Why Power Query instead of Python scripts?</strong> The Castrol team needed to maintain and modify the ETL process themselves after I left. Power Query runs inside Excel and Power BI, tools they already use daily. A Python script would require a developer to maintain it. Power Query lets the business analysts adjust transformations, add new data sources, and fix issues without technical support.</p>\n                \n                <p><strong>Why incremental loading instead of full refresh?</strong> The SAP data exports are large (500MB+ per file). Running a full refresh every day would take 45 minutes and consume significant server resources. I implemented incremental loading that only processes new or changed records, reducing daily refresh time to 3 minutes. This also allows the team to run updates multiple times per day without performance issues.</p>\n                \n                <p><strong>Why a star schema instead of a flat table?</strong> The initial version used a single flat table with all data. This worked for 10,000 rows but became unusable at 500,000 rows. I redesigned it as a star schema with a central fact table (sales transactions) and dimension tables (products, distributors, time periods). This reduced query time by 80% and made the data model easier to understand for non-technical users.</p>\n\n                <h2>Cost Analysis</h2>\n                <p><strong>Before automation:</strong> The commercial team had 3 analysts spending 15 hours per week each on data consolidation and reporting. At $40/hour loaded cost, that's $1,800/week or $7,200/month in labor costs dedicated to manual data work.</p>\n                \n                <p><strong>After automation:</strong> The same 3 analysts now spend 2 hours per week reviewing the automated reports and making strategic decisions. That's $240/week or $960/month. The Power BI Pro license costs $10/user/month, so total operating cost is $990/month.</p>\n                \n                <p><strong>Net savings:</strong> $6,210/month or $74,520/year. The automation paid for itself in the first month. Additionally, the team can now generate reports that were previously impossible (cross-distributor comparisons, trend analysis) because the data is clean and structured.</p>\n            ",
+    "sidebarHtml": "\n                <div class=\"project-sidebar-card\">\n                    <h3 class=\"project-sidebar-title\" data-i18n=\"project.details\">Project Details</h3>\n                    <div class=\"project-sidebar-item\">\n                        <div class=\"project-sidebar-label\" data-i18n=\"sidebar.client\">Client</div>\n                        <div class=\"project-sidebar-value\" data-i18n=\"castrol.client\">Castrol (BP) - División CVO</div>\n                    </div>\n                    <div class=\"project-sidebar-item\">\n                        <div class=\"project-sidebar-label\" data-i18n=\"sidebar.duration\">Duration</div>\n                        <div class=\"project-sidebar-value\" data-i18n=\"castrol.duration\">6 months</div>\n                    </div>\n                    <div class=\"project-sidebar-item\">\n                        <div class=\"project-sidebar-label\" data-i18n=\"sidebar.role\">Role</div>\n                        <div class=\"project-sidebar-value\" data-i18n=\"castrol.role\">Data & Strategy Consultant</div>\n                    </div>\n                    <div class=\"project-sidebar-item\">\n                        <div class=\"project-sidebar-label\" data-i18n=\"sidebar.metric\">Key Metric</div>\n                        <div class=\"project-metric-highlight\" data-i18n=\"castrol.metricNum\">80%</div>\n                        <div class=\"project-sidebar-value\" data-i18n=\"castrol.metricLabel\">Reduction in reporting time</div>\n                    </div>\n                </div>\n            ",
+    "bodyAttrs": " data-animate=\"fade-up\" data-duration=\"900\""
+  }
+}

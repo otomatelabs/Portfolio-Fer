@@ -1,0 +1,8 @@
+---
+// Renders both languages; CSS shows the one matching <html lang>, which i18n.js sets.
+interface Props {
+  t: { es: string; en: string };
+}
+const { t } = Astro.props;
+---
+<span data-lang="es">{t.es}</span><span data-lang="en">{t.en}</span>

@@ -68,7 +68,7 @@
     
     navLinks.forEach(link => {
         const href = link.getAttribute('href');
-        if (!href || href === '#') return;
+        if (!href || href === '#' || !href.startsWith('#')) return;
         const section = document.querySelector(href);
         if (section) {
             sections.push({ link, section });
