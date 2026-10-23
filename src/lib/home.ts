@@ -221,14 +221,14 @@ export const SERVICES = {
     {
       n: '04',
       title: l('Infraestructura y hosting', 'Infrastructure & hosting'),
-      sub: l('Operación 24/7', '24/7 operation'),
+      sub: l('Operación y soporte', 'Operation & support'),
       desc: l(
-        'No solo construyo tu automatización: la alojo, la monitoreo y la mantengo. Tus sistemas corren 24/7 con respaldos, alertas y tiempos de respuesta acordados.',
-        "I don't just build your automation, I host it, monitor it and maintain it. Your systems run 24/7 with backups, alerts and SLA-backed response times.",
+        'No solo construyo tu automatización: la alojo, la monitoreo y la mantengo. El monitoreo, los respaldos, las alertas y los tiempos de respuesta se definen en la cotización y los acuerdos de cada proyecto.',
+        "I don't just build your automation, I host it, monitor it and maintain it. Monitoring, backups, alerts and response times are defined in each project's quote and agreements.",
       ),
       list: [
         l('Proxmox VE y despliegue en la nube', 'Proxmox VE & cloud deployment'),
-        l('Monitoreo y alertas 24/7', '24/7 monitoring & alerting'),
+        l('Monitoreo y alertas', 'Monitoring & alerting'),
         l('Respaldos y recuperación ante desastres', 'Automatic backups & disaster recovery'),
         l('Zero Trust (Cloudflare Tunnels)', 'Zero Trust security (Cloudflare Tunnels)'),
       ],
@@ -422,8 +422,8 @@ export const METHOD = {
       "en": "Monitor & Optimize"
     },
     "desc": {
-      "es": "Aquí es donde la mayoría de los proveedores desaparecen. Yo no. Monitoreo tus workflows 24/7, rastreo métricas de rendimiento y optimizo continuamente. Si algo se rompe, lo arreglo. Si algo puede ser mejor, lo mejoro. Este es mi compromiso de retainer contigo.",
-      "en": "This is where most vendors disappear. I don't. I monitor your workflows 24/7, track performance metrics, and continuously optimize. If something breaks, I fix it. If something can be better, I improve it. This is my retainer commitment to you."
+      "es": "Aquí es donde la mayoría de los proveedores desaparecen. Yo no. Según lo acordado en la cotización, monitoreo tus workflows, rastreo métricas de rendimiento y optimizo de forma continua. El alcance, la duración y los tiempos de respuesta del soporte se definen con cada cliente.",
+      "en": "This is where most vendors disappear. I don't. As agreed in the quote, I monitor your workflows, track performance metrics, and continuously optimize. The scope, duration and response times of support are defined with each client."
     }
   },
   {
