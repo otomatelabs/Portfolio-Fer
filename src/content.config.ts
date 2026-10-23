@@ -4,6 +4,8 @@ import { z } from 'astro/zod';
 
 // Bilingual string. The LinkedIn pipeline always writes both languages.
 const L = z.object({ es: z.string().min(1), en: z.string().min(1) });
+// Home grid: one category per case (drives the filter) and an optional "featured" flag (max 3 on the home).
+const category = z.enum(['compliance', 'automation', 'data', 'ai', 'infra', 'custom']);
 const keyed = z.object({ key: z.string().nullable(), text: z.string() }).nullable();
 
 // Pre-Astro case studies: card fields are structured, page body is the original HTML (translated by i18n.js keys).
@@ -11,6 +13,8 @@ const legacy = z.object({
   slug: z.string(),
   format: z.literal('legacy'),
   listed: z.boolean(),
+  category,
+  featured: z.boolean().default(false),
   pageTitle: z.string(),
   title: z.string(),
   subtitle: z.string().nullable().optional(),
@@ -64,6 +68,8 @@ const v2 = z
     slug: z.string().regex(/^[a-z0-9-]+$/),
     format: z.literal('v2'),
     listed: z.boolean().default(true),
+    category,
+    featured: z.boolean().default(false),
     draft: z.boolean().default(false),
     date: z.coerce.date(),
     niche: z.string(),

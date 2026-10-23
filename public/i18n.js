@@ -12,7 +12,7 @@ const i18n = {
         'hero.label': 'Otomate Labs',
         'hero.tagline': 'Otomate Labs   Cloud Automation & Systems',
         'hero.line1': 'We build systems that deliver.', 'hero.line2': 'Results you can measure.',
-        'hero.bio': "We build systems that deliver measurable results. At Castrol (BP), our ETL automation slashed reporting time by 80%   freeing dozens of hours every week for the commercial team. At Huawei Cloud, we designed a Text-to-SQL assistant with Zero Trust architecture that achieved 0% SQL injection rate and was prototyped in just 3 days. Every project we touch gets faster, safer, or more efficient.",
+        'hero.bio': "We build systems that deliver measurable results. At Castrol (BP), our ETL automation slashed reporting time by 80%   freeing dozens of hours every week for the commercial team. At Huawei Cloud, we designed a Text-to-SQL assistant with Zero Trust architecture that was prototyped in just 3 days. Every project we touch gets faster, safer, or more efficient.",
         'hero.cta.work': 'See our work', 'hero.cta.contact': 'Get in touch',
 
         // Trusted By
@@ -59,8 +59,8 @@ const i18n = {
         'work.castrol.metric': '80% time reduction', 'work.castrol.tech': 'Power BI · Power Query · SAP',
         'work.castrol.cta': 'View case study →',
         'work.huawei.title': 'Secure Text-to-SQL Assistant with LLMs',
-        'work.huawei.desc': 'Designed a Text-to-SQL AI assistant protected by Zero Trust architecture. Achieved 0% SQL injection rate and delivered a working prototype in just 3 days.',
-        'work.huawei.metric': '0% SQL injection rate', 'work.huawei.tech': 'Llama 3.1 · GaussDB · RBAC',
+        'work.huawei.desc': 'Designed a Text-to-SQL AI assistant protected by Zero Trust architecture. Delivered a working prototype in just 3 days.',
+        'work.huawei.metric': 'Prototype in 3 days', 'work.huawei.tech': 'Llama 3.1 · GaussDB · RBAC',
         'work.huawei.cta': 'View case study →',
         'work.homelab.title': 'Zero Trust Architecture & Virtualization',
         'work.homelab.desc': 'Zero Trust homelab on constrained 4C/8GB hardware. Proxmox VE + Cloudflare Tunnels eliminated 100% of port exposure while running multiple services behind a single entry point.',
@@ -278,18 +278,18 @@ const i18n = {
 
         // --- HUAWEI CASE STUDY ---
         'huawei.title': 'Secure Text-to-SQL Assistant with LLMs',
-        'huawei.subtitle': 'AI assistant using Llama 3.1 for natural language to SQL translation with Zero Trust security architecture achieving 0% SQL injection rate.',
+        'huawei.subtitle': 'AI assistant using Llama 3.1 for natural language to SQL translation with Zero Trust security architecture with read-only access.',
         'huawei.client': 'Enterprise Telecom Clients',
         'huawei.duration': '72 hours (POC)',         'huawei.role': 'Cloud Architect',
-        'huawei.metricNum': '0%', 'huawei.metricLabel': 'SQL Injection Rate',
+        'huawei.metricNum': '3 days', 'huawei.metricLabel': 'To a working prototype',
         'huawei.ch1': 'Corporate clients needed to democratize access to data in relational databases (MySQL, PostgreSQL, GaussDB) for business users without SQL knowledge.',
-        'huawei.ch2': 'The main technical challenge wasn\'t just generating queries with AI, but ensuring absolute database security against model hallucinations or accidental SQL injections that could alter or destroy critical production data.',
+        'huawei.ch2': 'The main technical challenge wasn\'t just generating queries with AI, but protecting the database against model hallucinations or accidental SQL injections that could alter or destroy critical production data.',
         'huawei.b1': 'We developed a generative AI architecture using the Llama 3.1 (8B) model. Applied advanced Prompt Engineering by injecting the database schema and data dictionary as dynamic context. Applied least-privilege RBAC: the AI operated under strict read-only (SELECT) credentials with validation guardrails and query parameterization before execution.',
         'huawei.b.1': 'Advanced Prompt Engineering injecting database schema as dynamic context',
         'huawei.b.2': 'Least privilege principle (RBAC): AI under strict read-only (SELECT) credentials',
         'huawei.b.3': 'Validation guardrails and query parameterization before execution',
         'huawei.b.4': 'Blocking of DML and DDL commands to prevent accidental modifications',
-        'huawei.r1': 'A functional prototype was delivered in record time (3 days) with a high accuracy rate in translating natural language to SQL. The security architecture proved robust, ensuring no LLM-generated query could execute destructive commands.',
+        'huawei.r1': 'A functional prototype was delivered in record time (3 days) with a high accuracy rate in translating natural language to SQL. The architecture limited the assistant to read-only queries, with validation before execution.',
         'huawei.r2': 'The solution validated the feasibility of integrating AI with transactional databases without compromising corporate integrity.',
 
         // --- HOMELAB CASE STUDY ---
@@ -366,7 +366,7 @@ const i18n = {
         'hero.tagline': 'Otomate Labs   Automatización Cloud & Sistemas',
         'hero.line1': 'Construimos sistemas que entregan.',
         'hero.line2': 'Resultados que puedes medir.',
-        'hero.bio': "Construimos sistemas que entregan resultados medibles. En Castrol (BP), nuestra automatización ETL redujo el tiempo de reportes en 80%   liberando decenas de horas cada semana para el equipo comercial. En Huawei Cloud, diseñamos un asistente Text-to-SQL con arquitectura Zero Trust que logró 0% de inyección SQL y fue prototipado en solo 3 días. Cada proyecto que tocamos se vuelve más rápido, más seguro o más eficiente.",
+        'hero.bio': "Construimos sistemas que entregan resultados medibles. En Castrol (BP), nuestra automatización ETL redujo el tiempo de reportes en 80%   liberando decenas de horas cada semana para el equipo comercial. En Huawei Cloud, diseñamos un asistente Text-to-SQL con arquitectura Zero Trust que fue prototipado en solo 3 días. Cada proyecto que tocamos se vuelve más rápido, más seguro o más eficiente.",
         'hero.cta.work': 'Ver nuestro trabajo', 'hero.cta.contact': 'Contactar',
 
         // Trusted By
@@ -412,8 +412,8 @@ const i18n = {
         'work.castrol.metric': '80% reducción de tiempo', 'work.castrol.tech': 'Power BI · Power Query · SAP',
         'work.castrol.cta': 'Ver caso de estudio →',
         'work.huawei.title': 'Asistente Text-to-SQL Seguro con LLMs',
-        'work.huawei.desc': 'Diseñamos un asistente Text-to-SQL con IA protegido por arquitectura Zero Trust. Logramos 0% de inyección SQL y entregamos un prototipo funcional en solo 3 días.',
-        'work.huawei.metric': '0% tasa inyección SQL', 'work.huawei.tech': 'Llama 3.1 · GaussDB · RBAC',
+        'work.huawei.desc': 'Diseñamos un asistente Text-to-SQL con IA protegido por arquitectura Zero Trust. Entregamos un prototipo funcional en solo 3 días.',
+        'work.huawei.metric': 'Prototipo en 3 días', 'work.huawei.tech': 'Llama 3.1 · GaussDB · RBAC',
         'work.huawei.cta': 'Ver caso de estudio →',
         'work.homelab.title': 'Arquitectura Zero Trust y Virtualización',
         'work.homelab.desc': 'Homelab Zero Trust en hardware limitado 4C/8GB. Proxmox VE + Cloudflare Tunnels eliminaron 100% de exposición de puertos ejecutando múltiples servicios tras un solo punto de entrada.',
@@ -631,18 +631,18 @@ const i18n = {
 
         // --- HUAWEI CASE STUDY ---
         'huawei.title': 'Asistente Text-to-SQL Seguro con LLMs',
-        'huawei.subtitle': 'Asistente IA usando Llama 3.1 para traducción de lenguaje natural a SQL con arquitectura Zero Trust logrando 0% tasa de inyección SQL.',
+        'huawei.subtitle': 'Asistente IA usando Llama 3.1 para traducción de lenguaje natural a SQL con arquitectura Zero Trust con acceso de solo lectura.',
         'huawei.client': 'Clientes Enterprise (Telecomunicaciones)',
         'huawei.duration': '72 horas (POC)',         'huawei.role': 'Arquitecto Cloud',
-        'huawei.metricNum': '0%', 'huawei.metricLabel': 'Tasa de Inyección SQL',
+        'huawei.metricNum': '3 días', 'huawei.metricLabel': 'Hasta un prototipo funcional',
         'huawei.ch1': 'Los clientes corporativos necesitaban democratizar el acceso a los datos alojados en bases de datos relacionales (MySQL, PostgreSQL, GaussDB) para usuarios de negocio que no dominaban el lenguaje SQL.',
-        'huawei.ch2': 'El desafío técnico principal no era solo la generación de consultas mediante IA, sino garantizar la seguridad absoluta de la base de datos frente a alucinaciones del modelo o inyecciones SQL involuntarias que pudieran alterar o destruir datos críticos en producción.',
+        'huawei.ch2': 'El desafío técnico principal no era solo la generación de consultas mediante IA, sino proteger la base de datos frente a alucinaciones del modelo o inyecciones SQL involuntarias que pudieran alterar o destruir datos críticos en producción.',
         'huawei.b1': 'Desarrollamos una arquitectura de IA generativa utilizando el modelo Llama 3.1 (8B). Aplicamos Prompt Engineering avanzado inyectando el esquema de la base de datos y su diccionario de datos como contexto dinámico. Aplicamos el principio de menor privilegio (RBAC): la IA operaba bajo credenciales estrictas de solo lectura (SELECT) con guardrails de validación y parametrización de consultas.',
         'huawei.b.1': 'Prompt Engineering avanzado inyectando el esquema de la base de datos como contexto dinámico',
         'huawei.b.2': 'Principio de menor privilegio (RBAC): IA con credenciales estrictas de solo lectura (SELECT)',
         'huawei.b.3': 'Guardrails de validación y parametrización de consultas antes de su ejecución',
         'huawei.b.4': 'Bloqueo de comandos DML y DDL para prevenir modificaciones accidentales',
-        'huawei.r1': 'Se entregó un prototipo funcional en tiempo récord (3 días) con una alta tasa de precisión en la traducción de lenguaje natural a SQL. La arquitectura de seguridad demostró ser robusta, garantizando que ninguna consulta generada por el LLM pudiera ejecutar comandos destructivos.',
+        'huawei.r1': 'Se entregó un prototipo funcional en tiempo récord (3 días) con una alta tasa de precisión en la traducción de lenguaje natural a SQL. La arquitectura limitó al asistente a consultas de solo lectura, con validación antes de ejecutar.',
         'huawei.r2': 'La solución validó la viabilidad de integrar IA con bases de datos transaccionales sin comprometer la integridad corporativa.',
 
         // --- HOMELAB CASE STUDY ---

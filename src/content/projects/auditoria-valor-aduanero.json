@@ -2,6 +2,8 @@
   "slug": "auditoria-valor-aduanero",
   "format": "v2",
   "listed": true,
+  "category": "compliance",
+  "featured": true,
   "draft": false,
   "date": "2026-10-22",
   "niche": "import-mx",

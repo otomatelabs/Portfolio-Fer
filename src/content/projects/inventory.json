@@ -2,6 +2,8 @@
   "slug": "inventory",
   "format": "legacy",
   "listed": true,
+  "category": "automation",
+  "featured": false,
   "pageTitle": "Low-Friction Inventory & Procurement Automation   Otomate Labs",
   "title": "Automatización de Inventario y Procuración Sin Fricción",
   "subtitle": "Deterministic n8n workflow using Google Sheets as visual state management for non-technical users, creating a self-sustaining inventory system with zero technical maintenance.",

@@ -2,6 +2,8 @@
   "slug": "rental-ai",
   "format": "legacy",
   "listed": true,
+  "category": "automation",
+  "featured": false,
   "pageTitle": "AI Agent for Short-Term Rental Operations   Otomate Labs",
   "title": "Agente IA para Operaciones de Rentas Corta Estancia",
   "subtitle": "End-to-end AI workflow automating guest message triage and response suggestions for short-term rental managers, reducing manual work by 70% at under $0.05 per execution.",

@@ -2,6 +2,8 @@
   "slug": "university",
   "format": "legacy",
   "listed": false,
+  "category": "custom",
+  "featured": false,
   "pageTitle": "Course Management System   Otomate Labs",
   "title": "Course Management System",
   "subtitle": "Full-stack web application for course registration, grade tracking, and professor communication.",

@@ -2,6 +2,8 @@
   "slug": "valedor",
   "format": "legacy",
   "listed": true,
+  "category": "custom",
+  "featured": false,
   "pageTitle": "Sistema de Gestión CRM para ONG   Otomate Labs",
   "title": "Sistema de Gestión (CRM) a Medida para ONG",
   "subtitle": "Custom CRM plugin for a social reintegration NGO, built on WordPress to track beneficiaries, workshops, and sales while saving 10-20 administrative hours per week.",

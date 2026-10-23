@@ -1,0 +1,38 @@
+---
+import T from './T.astro';
+import { NAV, FOOT, LINKS } from '../lib/home';
+
+interface Props {
+  home?: boolean;
+}
+const { home = false } = Astro.props;
+const base = home ? '' : '/';
+const pick = (ks: string[]) => NAV.filter((n) => ks.includes(n.k));
+---
+<footer class="ol-foot" data-theme={home ? 'dark' : undefined}>
+  <div class="ol-wrap">
+    <div class="ol-foot-cols">
+      <div>
+        <a class="ol-logo" href={home ? '#top' : '/'}><img src="/Logo.png" alt="" width="30" height="30"><span>Otomate Labs</span></a>
+        <p class="ol-foot-tag"><T t={FOOT.tagline} /></p>
+      </div>
+      <div>
+        <h4><T t={FOOT.col.site} /></h4>
+        <ul>{pick(['como', 'servicios', 'casos']).map((n) => <li><a href={`${base}${n.href}`}><T t={n.t} /></a></li>)}</ul>
+      </div>
+      <div>
+        <h4><T t={FOOT.col.lab} /></h4>
+        <ul>{pick(['laboratorio', 'metodo']).map((n) => <li><a href={`${base}${n.href}`}><T t={n.t} /></a></li>)}</ul>
+      </div>
+      <div>
+        <h4><T t={FOOT.col.contact} /></h4>
+        <ul>
+          <li><a href={LINKS.call} target="_blank" rel="noopener"><T t={{ es: 'Agendar llamada', en: 'Book a call' }} /></a></li>
+          <li><a href={LINKS.linkedin} target="_blank" rel="noopener">LinkedIn</a></li>
+          <li><a href={LINKS.mail}>businesscontact@otomatelabs.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="ol-foot-copy"><T t={FOOT.copy} /></p>
+  </div>
+</footer>

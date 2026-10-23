@@ -2,6 +2,8 @@
   "slug": "proposals",
   "format": "legacy",
   "listed": true,
+  "category": "automation",
+  "featured": false,
   "pageTitle": "Automated Client Proposal Generation   Otomate Labs",
   "title": "Generación Automatizada de Propuestas para Clientes",
   "subtitle": "Form-triggered system dynamically generating personalized PDF proposals with legal scope, auto-calculated pricing, and payment links, reducing proposal creation time by 40%.",

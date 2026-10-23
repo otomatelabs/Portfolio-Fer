@@ -2,6 +2,8 @@
   "slug": "homelab",
   "format": "legacy",
   "listed": true,
+  "category": "infra",
+  "featured": false,
   "pageTitle": "Arquitectura Zero Trust y Virtualización   Otomate Labs",
   "title": "Arquitectura Zero Trust y Virtualización en Homelab",
   "subtitle": "Homelab running on 4C/8GB hardware with Proxmox VE, Cloudflare Tunnels, and Zero Trust Network Access eliminating all port forwarding.",

@@ -2,6 +2,8 @@
   "slug": "cybersecurity",
   "format": "legacy",
   "listed": true,
+  "category": "infra",
+  "featured": false,
   "pageTitle": "Real-Time Cybersecurity Traffic Analysis   Otomate Labs",
   "title": "Análisis de Tráfico de Ciberseguridad en Tiempo Real",
   "subtitle": "Local AI model performing deep packet inspection on real-time traffic with n8n workflow generating personalized client reports, scaling across multiple clients without additional headcount.",
