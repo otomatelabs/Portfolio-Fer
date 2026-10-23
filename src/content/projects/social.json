@@ -2,6 +2,8 @@
   "slug": "social",
   "format": "legacy",
   "listed": false,
+  "category": "data",
+  "featured": false,
   "pageTitle": "Community Data Dashboard   Otomate Labs",
   "title": "Community Data Dashboard",
   "subtitle": "Built a dashboard for a local NGO to track community health metrics and visualize impact over time.",

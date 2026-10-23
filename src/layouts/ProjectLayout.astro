@@ -1,7 +1,7 @@
 ---
 import head from '../legacy/project.head.html?raw';
-import top from '../legacy/project.top.html?raw';
-import footer from '../legacy/project.footer.html?raw';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
 
 interface Props {
   title: string;
@@ -17,11 +17,15 @@ const { title, description } = Astro.props;
     <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
     <Fragment set:html={head} />
     <link rel="stylesheet" href="/case-v2.css">
+    <link rel="stylesheet" href="/chrome.css">
 </head>
 <body>
-<Fragment set:html={top} />
+<a class="skip-link" href="#main-content" data-i18n="a11y.skip">Skip to content</a>
+<Nav />
+<main id="main-content" tabindex="-1">
 <slot />
-<Fragment set:html={footer} />
+</main>
+<Footer />
     <script is:inline src="/i18n.js"></script>
     <script is:inline src="/animations.js"></script>
     <script is:inline src="/script.js"></script>

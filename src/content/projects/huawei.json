@@ -2,6 +2,8 @@
   "slug": "huawei",
   "format": "legacy",
   "listed": true,
+  "category": "ai",
+  "featured": true,
   "pageTitle": "Asistente Text-to-SQL Seguro con LLMs   Otomate Labs",
   "title": "Asistente Text-to-SQL Seguro con LLMs",
   "subtitle": "AI assistant using Llama 3.1 for natural language to SQL translation with Zero Trust security architecture achieving 0% SQL injection rate.",

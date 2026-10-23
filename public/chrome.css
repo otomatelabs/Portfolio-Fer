@@ -1,0 +1,55 @@
+/* Shared chrome (top bar + footer) for the home and the case pages. Classes are prefixed `ol-` so they never clash with
+   the legacy stylesheet. Colours come from the design-system tokens (--ot-*), which follow [data-theme]. */
+html:not([lang="es"]) [data-lang="es"],
+html[lang="es"] [data-lang="en"] { display: none !important; }
+[data-theme] { color: var(--ot-text-primary); }
+.ol-wrap { max-width: 1180px; margin: 0 auto; padding: 0 clamp(1.25rem, 4vw, 3rem); }
+.ol-btn { display: inline-flex; align-items: center; gap: .5rem; padding: .8rem 1.4rem; border-radius: .5rem; font: 600 .9rem var(--ot-font-display); border: 1.5px solid var(--ot-border); color: inherit; text-decoration: none; transition: .2s; }
+.ol-btn:hover { transform: translateY(-1px); }
+.ol-pri { background: var(--ot-brand-coral); border-color: var(--ot-brand-coral); color: oklch(12% .02 30); }
+.ol-nav { position: sticky; top: 0; z-index: 50; background: color-mix(in oklch, var(--ot-bg) 84%, transparent); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--ot-border-subtle); font-family: var(--ot-font-body); }
+.ol-nav-in { display: flex; align-items: center; gap: 2rem; height: 64px; }
+.ol-logo { display: inline-flex; align-items: center; gap: .6rem; font: 700 1.05rem var(--ot-font-display); color: inherit; text-decoration: none; }
+.ol-logo img { width: 30px; height: 30px; display: block; }
+.ol-menu { display: flex; gap: 1.6rem; list-style: none; margin: 0 0 0 auto; padding: 0; font-size: .9rem; color: var(--ot-text-secondary); }
+.ol-menu a { position: relative; display: inline-block; padding: .4rem 0; color: inherit; text-decoration: none; transition: color .2s; }
+.ol-menu a::after { content: ""; position: absolute; left: 0; right: 0; bottom: -2px; height: 2px; border-radius: 2px; background: var(--ot-brand-coral); transform: scaleX(0); transform-origin: left; transition: transform .3s cubic-bezier(.2, .7, .2, 1); }
+.ol-menu a:hover { color: var(--ot-text-primary); }
+.ol-menu a[aria-current="true"] { color: var(--ot-text-primary); }
+.ol-menu a[aria-current="true"]::after { transform: scaleX(1); }
+.ol-tools { display: flex; align-items: center; gap: .6rem; }
+.ol-chip-btn { display: inline-flex; align-items: center; justify-content: center; min-width: 38px; height: 38px; padding: 0 .55rem; border: 1px solid var(--ot-border); border-radius: .5rem; background: transparent; color: var(--ot-text-primary); cursor: pointer; font: 600 .78rem var(--ot-font-mono); }
+.ol-chip-btn:hover { border-color: var(--ot-brand-coral); }
+#theme-toggle .icon-moon { display: none; }
+[data-theme="light"] #theme-toggle .icon-sun { display: none; }
+[data-theme="light"] #theme-toggle .icon-moon { display: block; }
+.ol-burger { display: none; position: relative; width: 42px; height: 38px; border: 1px solid var(--ot-border); border-radius: .5rem; background: transparent; color: var(--ot-text-primary); cursor: pointer; }
+.ol-burger span { position: absolute; left: 11px; right: 11px; height: 2px; border-radius: 2px; background: currentColor; transition: .25s; }
+.ol-burger span:first-child { top: 13px; } .ol-burger span:last-child { top: 21px; }
+.ol-burger[aria-expanded="true"] span:first-child { top: 17px; rotate: 45deg; }
+.ol-burger[aria-expanded="true"] span:last-child { top: 17px; rotate: -45deg; }
+@media (max-width: 900px) {
+  .ol-nav-in { gap: .8rem; }
+  .ol-tools { margin-left: auto; }
+  .ol-burger { display: block; }
+  .ol-cta-nav { display: none; }
+  .ol-menu { position: absolute; top: 64px; left: 0; right: 0; flex-direction: column; gap: 0; margin: 0; padding: .4rem clamp(1.25rem, 4vw, 3rem) 1rem; background: var(--ot-bg); border-bottom: 1px solid var(--ot-border); opacity: 0; visibility: hidden; translate: 0 -8px; transition: .25s; }
+  .ol-menu.open { opacity: 1; visibility: visible; translate: 0 0; }
+  .ol-menu li { border-top: 1px solid var(--ot-border-subtle); } .ol-menu li:first-child { border: 0; }
+  .ol-menu a { display: block; padding: .95rem 0; font-size: 1rem; }
+  .ol-menu a::after { display: none; }
+  .ol-menu a[aria-current="true"] { color: var(--ot-brand-coral); }
+}
+@media (max-width: 360px) { .ol-logo span { display: none; } }
+.ol-foot { background: var(--ot-bg); border-top: 1px solid var(--ot-border); padding: 3rem 0 2rem; color: var(--ot-text-secondary); font: 400 .9rem/1.6 var(--ot-font-body); }
+.ol-foot-cols { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1.9fr; gap: 2rem; }
+.ol-foot h4 { margin: 0 0 .8rem; font: 600 .8rem var(--ot-font-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--ot-text-primary); }
+.ol-foot ul { list-style: none; margin: 0; padding: 0; } .ol-foot li { margin: .35rem 0; }
+.ol-foot a { color: inherit; text-decoration: none; } .ol-foot a:hover { color: var(--ot-text-primary); }
+.ol-foot .ol-logo { color: var(--ot-text-primary); }
+.ol-foot-tag { margin: .6rem 0 0; max-width: 34ch; }
+.ol-foot-copy { margin: 2rem 0 0; font-size: .8rem; }
+@media (max-width: 820px) { .ol-foot-cols { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 520px) { .ol-foot-cols { grid-template-columns: 1fr; } }
+.ol-foot-cols > * { min-width: 0; } .ol-foot li a { overflow-wrap: anywhere; }
+@media (prefers-reduced-motion: reduce) { .ol-menu, .ol-menu a::after, .ol-btn, .ol-burger span { transition: none; } }

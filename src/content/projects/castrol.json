@@ -2,6 +2,8 @@
   "slug": "castrol",
   "format": "legacy",
   "listed": true,
+  "category": "data",
+  "featured": true,
   "pageTitle": "Automatización de Pipeline ETL y BI   Otomate Labs",
   "title": "Automatización de Pipeline ETL y Business Intelligence",
   "subtitle": "Automated ETL pipeline for SAP ERP data extraction, reducing reporting time by 80% and enabling monthly sales forecasting with +/- 15% accuracy.",

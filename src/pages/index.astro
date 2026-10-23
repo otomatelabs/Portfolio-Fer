@@ -1,25 +1,307 @@
 ---
-import head from '../legacy/home.head.html?raw';
-import top from '../legacy/home.top.html?raw';
-import bottom from '../legacy/home.bottom.html?raw';
-import WorkCard from '../components/WorkCard.astro';
-import { getProjects, sortForGrid } from '../lib/projects';
+import T from '../components/T.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import { getProjects, sortForGrid, projectUrl, type Project } from '../lib/projects';
+import { CATEGORIES, ICONS, EXTRA_CASES, HERO, FLOW, SERVICES, RESULTS, WORK, LAB, CAPS, METHOD, FAQ, CONTACT, LINKS, type Category } from '../lib/home';
 
-const projects = sortForGrid(await getProjects());
+const listed = sortForGrid(await getProjects());
+const featured = listed.filter((p) => p.data.featured).slice(0, 3);
+const rest = listed.filter((p) => !featured.includes(p));
+// Categories present in the grid (in a stable order), so a filter never leads to an empty list.
+const present = (Object.keys(CATEGORIES) as Category[]).filter(
+  (c) => rest.some((p) => p.data.category === c) || EXTRA_CASES.some((e) => e.category === c),
+);
+const tone = (i: number) => `--v:var(--c${(i % 4) + 1})`;
+const title = 'Otomate Labs · Automation, AI and data for operations';
+const description =
+  'Otomate Labs builds automations, AI assistants and dashboards for operations teams. Process automation, AI & BI, and hosted infrastructure, with a person approving what matters.';
 ---
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<Fragment set:html={head} />
-    <link rel="canonical" href="https://otomatelabs.com/">
-    <link rel="stylesheet" href="/case-v2.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{title}</title>
+<meta name="description" content={description}>
+<link rel="canonical" href="https://otomatelabs.com/">
+<link rel="icon" type="image/png" href="/Logo.png">
+<link rel="preload" href="/ds/fonts/sora-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/ds/fonts/work-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/ds/fonts.css">
+<link rel="stylesheet" href="/ds/tokens.css">
+<link rel="stylesheet" href="/chrome.css">
+<link rel="stylesheet" href="/home.css">
+<script is:inline>
+  // Set language and theme before first paint (i18n.js keeps the same keys).
+  try {
+    var q = new URLSearchParams(location.search).get('lang');
+    var l = q === 'es' || q === 'en' ? q : localStorage.getItem('lang') || 'en';
+    document.documentElement.lang = l;
+  } catch (e) {}
+</script>
+<noscript><style>.rv{opacity:1!important;translate:none!important}</style></noscript>
 </head>
-<body>
-<Fragment set:html={top} />
-{projects.map((project) => <WorkCard project={project} />)}
-<Fragment set:html={bottom} />
-    <script is:inline src="/i18n.js"></script>
-    <script is:inline src="/animations.js"></script>
-    <script is:inline src="/script.js"></script>
+<body id="top">
+<a class="skip" href="#como" data-i18n="a11y.skip">Skip to content</a>
+<Nav home />
+
+<header class="hero" data-theme="dark">
+  <div class="wrap g2">
+    <div>
+      <p class="kick"><T t={HERO.kicker} /></p>
+      <h1 style="margin-top:1rem">
+        <T t={HERO.pre} /><br><span class="rot" id="rot" data-words={JSON.stringify(HERO.words)}><span class="rot-word"><T t={HERO.words[0]} /></span></span><br><T t={HERO.post} />
+      </h1>
+      <p class="lead"><T t={HERO.lead} /></p>
+      <div class="cta">
+        <a class="btn pri" href={LINKS.call} target="_blank" rel="noopener"><T t={HERO.cta1} /></a>
+        <a class="btn" href="#casos"><T t={HERO.cta2} /></a>
+      </div>
+      <p class="trust"><T t={HERO.trust} /> <b>CASTROL (BP)</b> · <b>HUAWEI CLOUD</b></p>
+    </div>
+    <aside class="dm" aria-label="Measured results">
+      <p class="kick"><T t={HERO.panelTitle} /></p>
+      {HERO.panel.map((r) => <div><span><T t={r.label} /></span><span class="o"><T t={r.value} /></span></div>)}
+      <a class="btn" style="justify-content:center;margin-top:.4rem" href="#casos"><T t={HERO.panelCta} /></a>
+    </aside>
+  </div>
+</header>
+
+<section id="como" data-spy="como" data-theme="light" class="bn">
+  <div class="wrap">
+    <p class="kick"><T t={FLOW.kicker} /></p>
+    <h2 style="margin:.6rem 0 0;max-width:20ch"><T t={FLOW.title} /> <em class="s"><T t={FLOW.accent} /></em></h2>
+    <div class="flowbox">
+      <div class="flow" id="flow" data-results={JSON.stringify(FLOW.results)}>
+        <ul class="fl-tools">
+          {FLOW.tools.map((t, k) => (
+            <li style={`--k:${k}`}><T t={t} /><span class="fl-wire"><em class="fl-ev" style={`--k:${k}`}>{FLOW.wires[k]}</em></span></li>
+          ))}
+        </ul>
+        <div class="fl-in" data-theme="dark">
+          <span class="fl-brand">OTOMATE</span>
+          <div class="fl-stage"><div class="lb"><T t={FLOW.labels.core} /></div><div class="fl-core"><T t={FLOW.core} /><small>n8n · Python · LLM</small></div></div>
+          <div class="fl-stage"><div class="lb"><T t={FLOW.labels.services} /></div><ul class="fl-agents">{FLOW.services.map((s) => <li><T t={s} /></li>)}</ul></div>
+          <div class="fl-stage"><div class="lb"><T t={FLOW.labels.human} /></div><span class="fl-ok" id="ok"><T t={FLOW.ok} /></span></div>
+          <div class="fl-stage"><div class="lb"><T t={FLOW.labels.results} /></div><div class="fl-stack" id="stack" aria-live="off"></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="how">
+      {FLOW.how.map((h, i) => (
+        <div class="rv"><span class="n">0{i + 1}</span><h3><T t={h.t} /></h3><p><T t={h.d} /></p></div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<span class="anchor" id="services"></span>
+<section id="servicios" data-spy="servicios" data-theme="dark">
+  <div class="wrap">
+    <p class="kick"><T t={SERVICES.kicker} /></p>
+    <h2 style="margin:.6rem 0 .8rem"><T t={SERVICES.title} /> <em class="s"><T t={SERVICES.accent} /></em></h2>
+    <p class="lead"><T t={SERVICES.lead} /></p>
+    <div class="sv">
+      <div class="sv-tabs" role="tablist" id="svtabs">
+        {SERVICES.items.map((s, i) => (
+          <button role="tab" type="button" id={`svt-${i}`} aria-controls={`svp-${i}`} aria-selected={i === 0 ? 'true' : 'false'} tabindex={i === 0 ? 0 : -1}>
+            <span class="nn">{s.n}</span><b><T t={s.title} /></b><small><T t={s.sub} /></small>
+          </button>
+        ))}
+      </div>
+      <div class="sv-panels">
+        {SERVICES.items.map((s, i) => (
+          <div class="sv-panel" role="tabpanel" id={`svp-${i}`} aria-labelledby={`svt-${i}`} hidden={i !== 0}>
+            <span class="kick">{s.n} · <T t={s.sub} /></span>
+            <h3><T t={s.title} /></h3>
+            <p><T t={s.desc} /></p>
+            <ul>{s.list.map((x) => <li><T t={x} /></li>)}</ul>
+            <a class="btn" href={`#casos`} data-filter={s.category}><T t={SERVICES.cta} /></a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="resultados" data-spy="casos" data-theme="dark" style="padding-top:0">
+  <div class="wrap">
+    <p class="kick"><T t={RESULTS.kicker} /></p>
+    <h2 style="margin:.6rem 0 0"><T t={RESULTS.title} /></h2>
+    <div class="bento">
+      {RESULTS.items.map((r, i) => (
+        <div class={`b${i + 1}`}><span class="big">{r.big}</span><h3><T t={r.t} /></h3><p><T t={r.d} /></p></div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<span class="anchor" id="work"></span>
+<section id="casos" data-spy="casos" data-theme="light" class="bn">
+  <div class="wrap">
+    <p class="kick"><T t={WORK.kicker} /></p>
+    <h2 style="margin:.6rem 0 .8rem"><T t={WORK.title} /></h2>
+    <p class="lead"><T t={WORK.lead} /></p>
+    <div class="feat-grid">
+      {featured.map((p, i) => {
+        const d = p.data;
+        return (
+          <a class="wc feat rv" href={projectUrl(d.slug)} data-c={d.category}>
+            <div class="v" style={tone(i)}>
+              <span class="chip"><T t={CATEGORIES[d.category]} /></span>
+              <div class="ic" set:html={d.card!.icon} />
+            </div>
+            <div class="b">
+              {d.format === 'legacy' ? (
+                <>
+                  <h3 data-i18n={d.card!.title?.key}>{d.card!.title?.text}</h3>
+                  <p data-i18n={d.card!.desc?.key}>{d.card!.desc?.text}</p>
+                  <span class="m" data-i18n={d.card!.metric?.key}>{d.card!.metric?.text}</span>
+                  <span class="tech" data-i18n={d.card!.tech?.key}>{d.card!.tech?.text}</span>
+                </>
+              ) : (
+                <>
+                  <h3><T t={d.title} /></h3>
+                  <p><T t={d.card.desc} /></p>
+                  <span class="m"><T t={d.card.metric} /></span>
+                  <span class="tech">{d.card.tech}</span>
+                </>
+              )}
+              <span class="go"><T t={WORK.cta} /></span>
+            </div>
+          </a>
+        );
+      })}
+    </div>
+
+    <span class="anchor" id="additional"></span>
+    <div class="all-head">
+      <h2 style="font-size:clamp(1.5rem,2.6vw,2rem)"><T t={WORK.allTitle} /></h2>
+      <p class="lead" style="margin-top:.4rem"><T t={WORK.allLead} /></p>
+    </div>
+    <div id="grid-work">
+      <div class="filters" role="group" aria-label="Categories">
+        <button type="button" aria-pressed="true" data-k="all"><T t={WORK.all} /></button>
+        {present.map((c) => <button type="button" aria-pressed="false" data-k={c}><T t={CATEGORIES[c]} /></button>)}
+      </div>
+      <div class="grid">
+        {rest.map((p, i) => {
+          const d = p.data;
+          return (
+            <a class="wc rv" href={projectUrl(d.slug)} data-c={d.category}>
+              <div class="v" style={tone(i + 3)}>
+                <span class="chip"><T t={CATEGORIES[d.category]} /></span>
+                <div class="ic" set:html={d.card!.icon} />
+              </div>
+              <div class="b">
+                {d.format === 'legacy' ? (
+                  <>
+                    <h3 data-i18n={d.card!.title?.key}>{d.card!.title?.text}</h3>
+                    <p data-i18n={d.card!.desc?.key}>{d.card!.desc?.text}</p>
+                    <span class="m" data-i18n={d.card!.metric?.key}>{d.card!.metric?.text}</span>
+                  </>
+                ) : (
+                  <>
+                    <h3><T t={d.title} /></h3>
+                    <p><T t={d.card.desc} /></p>
+                    <span class="m"><T t={d.card.metric} /></span>
+                  </>
+                )}
+              </div>
+            </a>
+          );
+        })}
+        {EXTRA_CASES.map((e, i) => {
+          const Tag = 'href' in e ? 'a' : 'div';
+          return (
+          <Tag class={`wc rv${'href' in e ? '' : ' plain'}`} data-c={e.category} href={'href' in e ? e.href : undefined}>
+            <div class="v" style={tone(i + rest.length + 3)}>
+              <span class="chip"><T t={CATEGORIES[e.category]} /></span>
+              <div class="ic"><svg viewBox="0 0 24 24" set:html={ICONS[e.icon]} /></div>
+            </div>
+            <div class="b">
+              <h3><T t={e.title} /></h3>
+              <p><T t={e.desc} /></p>
+              <span class="m"><T t={e.metric} /></span>
+              <span class="tech">{e.tech}</span>
+            </div>
+          </Tag>
+          );
+        })}
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="laboratorio" data-spy="laboratorio" data-theme="dark">
+  <div class="wrap">
+    <div class="lab">
+      <div>
+        <p class="kick"><T t={LAB.kicker} /></p>
+        <h2 style="margin:.6rem 0 1rem"><T t={LAB.title} /> <em class="s"><T t={LAB.accent} /></em></h2>
+        <p class="lead"><T t={LAB.lead} /></p>
+        <ul>{LAB.list.map((x) => <li><T t={x} /></li>)}</ul>
+        <a class="btn pri" href={LINKS.demo} target="_blank" rel="noopener"><T t={LAB.cta1} /></a>
+        <a class="btn" href="/projects/auditoria-valor-aduanero/"><T t={LAB.cta2} /></a>
+      </div>
+      <div>
+        <p class="kick"><T t={LAB.gatesTitle} /></p>
+        <div class="gates">
+          {LAB.gates.map(([g, s]) => <div class="gate"><T t={g} />{s === 'ok' ? <span class="ok">✓</span> : <span class="w"><T t={LAB.you} /></span>}</div>)}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<span class="anchor" id="skills"></span>
+<section id="capacidades" data-spy="metodo" data-theme="light" class="bn">
+  <div class="wrap">
+    <p class="kick"><T t={CAPS.kicker} /></p>
+    <h2 style="margin:.6rem 0 0"><T t={CAPS.title} /> <em class="s"><T t={CAPS.accent} /></em></h2>
+    <div class="caps">
+      {CAPS.groups.map((g) => (
+        <div class="card rv"><h3><T t={g.t} /></h3>{g.items.map((x) => <span class="chip"><T t={x} /></span>)}</div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section id="metodo" data-spy="metodo" data-theme="dark">
+  <div class="wrap">
+    <p class="kick"><T t={METHOD.kicker} /></p>
+    <h2 style="margin:.6rem 0 .8rem"><T t={METHOD.title} /></h2>
+    <p class="lead"><T t={METHOD.lead} /></p>
+    <ol class="steps6">
+      {METHOD.steps.map((s, i) => (
+        <li class="rv"><span class="num">0{i + 1}</span><h3><T t={s.title} /></h3><p><T t={s.desc} /></p></li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<section id="faq" data-spy="contacto" data-theme="light" class="bn">
+  <div class="wrap" style="max-width:860px">
+    <p class="kick"><T t={FAQ.kicker} /></p>
+    <h2 style="margin:.6rem 0 1.6rem"><T t={FAQ.title} /></h2>
+    {FAQ.items.map((f) => <details><summary><T t={f.q} /></summary><p><T t={f.a} /></p></details>)}
+  </div>
+</section>
+
+<span class="anchor" id="contact"></span>
+<section id="contacto" data-spy="contacto" class="cta-end" data-theme="dark">
+  <div class="wrap">
+    <h2><T t={CONTACT.title} /> <em class="s"><T t={CONTACT.accent} /></em></h2>
+    <p class="lead"><T t={CONTACT.lead} /></p>
+    <a class="btn pri" href={LINKS.call} target="_blank" rel="noopener"><T t={CONTACT.call} /></a>
+    <a class="btn" href={LINKS.mail}><T t={CONTACT.mail} /></a>
+    <p class="note"><T t={CONTACT.linkedin} /> <a href={LINKS.linkedin} target="_blank" rel="noopener" style="color:var(--ot-brand-coral)">LinkedIn →</a></p>
+  </div>
+</section>
+
+<Footer home />
+<script is:inline src="/i18n.js"></script>
+<script is:inline src="/home.js"></script>
 </body>
 </html>

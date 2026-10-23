@@ -2,6 +2,8 @@
   "slug": "cloud-ai",
   "format": "legacy",
   "listed": true,
+  "category": "ai",
+  "featured": false,
   "pageTitle": "Cloud-Native AI Orchestration & API Integration   Otomate Labs",
   "title": "Orquestación de IA Cloud-Native e Integración de APIs",
   "subtitle": "Hybrid cloud-local AI system running local LLMs on GCP Compute, reducing AI token consumption by 30-45% and external API costs by 15-30% while enhancing data privacy.",
