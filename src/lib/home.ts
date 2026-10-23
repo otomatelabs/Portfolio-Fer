@@ -118,7 +118,7 @@ export const HERO = {
     l('WhatsApp', 'WhatsApp'),
     l('Slack', 'Slack'),
   ],
-  post: l('y lo que sigue lo hace el sistema.', 'and the system does what comes next.'),
+  post: l('con el resto de tu operación.', 'to the rest of your operation.'),
   lead: l(
     'Tus herramientas ya existen. Construimos lo que falta entre ellas: automatizaciones, asistentes de IA y tableros que hacen el trabajo repetitivo, con una persona decidiendo lo importante.',
     'Your tools already exist. We build what is missing between them: automations, AI assistants and dashboards that do the repetitive work, with a person deciding what matters.',
