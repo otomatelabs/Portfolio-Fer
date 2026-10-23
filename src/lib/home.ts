@@ -133,7 +133,7 @@ export const HERO = {
   panelTitle: l('Resultados medidos', 'Measured results'),
   panel: [
     { label: l('Reportes comerciales (ETL + BI)', 'Commercial reporting (ETL + BI)'), value: l('−80 % TIEMPO', '−80 % TIME') },
-    { label: l('Asistente Text-to-SQL seguro', 'Secure Text-to-SQL assistant'), value: l('0 % INYECCIÓN', '0 % INJECTION') },
+    { label: l('Asistente Text-to-SQL seguro', 'Secure Text-to-SQL assistant'), value: l('3 DÍAS A PROTOTIPO', '3 DAYS TO PROTOTYPE') },
     { label: l('Triage de mensajes con IA', 'AI message triage'), value: l('−70 % MANUAL', '−70 % MANUAL') },
     { label: l('CRM a medida para una ONG', 'Custom CRM for an NGO'), value: l('10–20 H/SEM', '10–20 H/WK') },
   ],
@@ -242,7 +242,7 @@ export const RESULTS = {
   title: l('Prueba, no promesas', 'Proof, not promises'),
   items: [
     { big: '80 %', t: l('menos tiempo de reporte', 'less reporting time'), d: l('ETL contra SAP y tableros comerciales. Experiencia previa en Castrol (BP).', 'ETL against SAP and commercial dashboards. Prior experience at Castrol (BP).') },
-    { big: '0 %', t: l('inyección SQL', 'SQL injection'), d: l('Asistente Text-to-SQL con Zero Trust, prototipado en 3 días. Experiencia previa en Huawei Cloud.', 'Text-to-SQL assistant with Zero Trust, prototyped in 3 days. Prior experience at Huawei Cloud.') },
+    { big: '3 días', t: l('a un prototipo funcional', 'to a working prototype'), d: l('Asistente Text-to-SQL con Zero Trust y acceso de solo lectura. Experiencia previa en Huawei Cloud.', 'Text-to-SQL assistant with Zero Trust and read-only access. Prior experience at Huawei Cloud.') },
     { big: '35 %', t: l('menos costo en la nube', 'lower cloud cost'), d: l('Optimización de infraestructura y consumo.', 'Infrastructure and consumption optimization.') },
     { big: '70 %', t: l('menos triage manual', 'less manual triage'), d: l('Agente de IA para mensajes de rentas de corta estancia, con humano en el ciclo.', 'AI agent for short-term rental messages, with a human in the loop.') },
     { big: '10–20 h', t: l('por semana', 'per week'), d: l('Administración ahorrada con un CRM a medida para una ONG.', 'Admin time saved with a custom CRM for an NGO.') },
