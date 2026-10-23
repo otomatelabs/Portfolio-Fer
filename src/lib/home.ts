@@ -445,11 +445,11 @@ export const FAQ = {
   items: [
     {
       q: l('¿Para quién trabajan?', 'Who do you work with?'),
-      a: l('Para administradores de propiedades y pymes que quieren quitar procesos manuales: desde la comunicación con clientes hasta el mantenimiento y los reportes.', 'Property managers and SMEs that want to remove manual processes, from guest communication to maintenance coordination and reporting.'),
+      a: l('Para empresas y equipos que quieren quitar procesos manuales: automatización, datos y reportes, IA aplicada, software a medida e infraestructura. También administradores de propiedades.', 'Companies and teams that want to remove manual processes: automation, data and reporting, applied AI, custom software and infrastructure. Property managers too.'),
     },
     {
       q: l('¿Cómo empezamos?', 'How do we start?'),
-      a: l('Con una llamada de descubrimiento. Mapeamos tus procesos manuales, definimos métricas de éxito y de ahí sale el diseño y la ruta.', 'With a discovery call. We map your manual processes, define success metrics, and the design and roadmap come out of that.'),
+      a: l('Con una llamada de descubrimiento. Mapeamos el proceso o problema, definimos métricas de éxito y de ahí sale el diseño, la ruta y la cotización.', 'With a discovery call. We map the process or problem, define success metrics, and the design, roadmap and quote come out of that.'),
     },
     {
       q: l('¿Qué pasa si la IA se equivoca?', 'What if the AI gets it wrong?'),
@@ -461,7 +461,7 @@ export const FAQ = {
     },
     {
       q: l('¿Qué pasa después del lanzamiento?', 'What happens after launch?'),
-      a: l('Sigo ahí: monitoreo 24/7, respaldos, alertas y mejora continua. Si algo falla, lo arreglo; si puede mejorar, lo mejoro.', 'I stay on: 24/7 monitoring, backups, alerts and continuous improvement. If something breaks I fix it; if something can be better I improve it.'),
+      a: l('El soporte posterior se define en la cotización y los acuerdos de cada proyecto: qué incluye (por ejemplo monitoreo, respaldos, alertas, correcciones o mejoras), por cuánto tiempo y con qué tiempos de respuesta.', 'Post-launch support is defined in each project\'s quote and agreements: what it includes (for example monitoring, backups, alerts, fixes or improvements), for how long and with what response times.'),
     },
   ],
 };
